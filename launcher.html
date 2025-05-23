@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Game Launcher</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #0f0f23 100%);
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .launcher {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ff88, #4ecdc4, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .launch-btn {
+            padding: 20px 40px;
+            background: linear-gradient(45deg, #00ff88, #4ecdc4);
+            border: none;
+            border-radius: 30px;
+            color: #0f0f23;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+        }
+        p {
+            margin: 20px 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="launcher">
+        <h1>🌌 Quantum Network Game</h1>
+        <p>Educational game based on Burkhart et al. research paper</p>
+        <p>"Error-Detected State Transfer and Entanglement in a Superconducting Quantum Network"</p>
+        
+        <a href="index.html" class="launch-btn">🚀 Launch Game</a>
+        
+        <p style="font-size: 0.9em; margin-top: 30px;">
+            Click the button above to start playing!
+        </p>
+    </div>
+</body>
+</html>

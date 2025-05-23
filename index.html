@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Network State Transfer Game</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>🌌 Quantum Network State Transfer & Entanglement Game</h1>
+            <p>Based on "Error-Detected State Transfer and Entanglement in a Superconducting Quantum Network"</p>
+            <p class="authors">Burkhart et al., PRX Quantum 2, 030321 (2021)</p>
+        </header>
+
+        <nav id="level-selector">
+            <button onclick="showLevel('theory')" class="active">📚 Theory</button>
+            <button onclick="showLevel('beamsplitter')">🔄 Beamsplitter Lab</button>
+            <button onclick="showLevel('error-detection')">🛡️ Error Detection</button>
+            <button onclick="showLevel('entanglement')">🔗 Entanglement</button>
+            <button onclick="showLevel('network')">🌐 Network Design</button>
+            <button onclick="showLevel('challenge')">🎯 Final Challenge</button>
+        </nav>
+
+        <!-- Theory Level -->
+        <div id="theory-level" class="level active">
+            <h2>🧠 Quantum Network Theory</h2>
+            
+            <div class="theory-section">
+                <h3>Network Architecture</h3>
+                <div class="network-diagram">
+                    <div class="module" id="module1">
+                        <div class="cavity">Cavity $\hat{a}_1$</div>
+                        <div class="transmon">Ancilla</div>
+                        <div class="converter">Converter</div>
+                    </div>
+                    <div class="bus-resonator">
+                        <div class="bus-mode">Bus $\hat{b}$</div>
+                        <div class="quality-factor">Q = 51,000</div>
+                    </div>
+                    <div class="module" id="module2">
+                        <div class="cavity">Cavity $\hat{a}_2$</div>
+                        <div class="transmon">Ancilla</div>
+                        <div class="converter">Converter</div>
+                    </div>
+                </div>
+
+                <h3>Parametric Conversion Hamiltonian</h3>
+                <div class="equation-box">
+                    $$\hat{H}_j/\hbar = g e^{-i\Delta_j t} \hat{a}_j^\dagger \hat{b} + g^* e^{i\Delta_j t} \hat{a}_j \hat{b}^\dagger$$
+                </div>
+                <p>Where $g$ is the conversion rate and $\Delta_j$ is the detuning from resonance.</p>
+
+                <h3>Effective Beamsplitter Transformation</h3>
+                <div class="equation-box">
+                    $$\hat{a}_1 \rightarrow \cos\theta \hat{a}_1 + \sin\theta \hat{a}_2$$
+                    $$\hat{a}_2 \rightarrow \cos\theta \hat{a}_2 - \sin\theta \hat{a}_1$$
+                </div>
+                
+                <h3>Beamsplitter Angle Control</h3>
+                <div class="equation-box">
+                    $$\theta(\Delta) = \frac{\pi}{2}\left(1 - \frac{\Delta \tau_{BS}}{2\pi}\right)$$
+                    $$\tau_{BS} = \frac{2\pi}{\sqrt{8g^2 + \Delta^2}}$$
+                </div>
+
+                <div class="theory-controls">
+                    <h4>Interactive Parameter Explorer</h4>
+                    <div class="parameter-control">
+                        <label>Detuning $\Delta/g$: <span id="detuning-value">0</span></label>
+                        <input type="range" id="detuning-slider" min="0" max="3" step="0.1" value="0">
+                    </div>
+                    <div class="parameter-control">
+                        <label>Conversion Rate $g/2\pi$ (MHz): <span id="rate-value">0.56</span></label>
+                        <input type="range" id="rate-slider" min="0.1" max="2" step="0.1" value="0.56">
+                    </div>
+                    
+                    <div class="results-display">
+                        <p>Beamsplitter Time: $\tau_{BS} = $ <span id="bs-time">624</span> ns</p>
+                        <p>Mixing Angle: $\theta = $ <span id="mixing-angle">90</span>°</p>
+                        <p>Bus Occupation: <span id="bus-occupation">Varies</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beamsplitter Level -->
+        <div id="beamsplitter-level" class="level">
+            <h2>🔄 Beamsplitter Laboratory</h2>
+            
+            <div class="lab-setup">
+                <div class="objective">
+                    <h3>🎯 Objective</h3>
+                    <p>Design beamsplitter operations for different quantum network tasks:</p>
+                    <ul>
+                        <li><strong>State Transfer:</strong> $\theta = 90°$ (SWAP operation)</li>
+                        <li><strong>Entanglement:</strong> $\theta = 45°$ (50:50 beamsplitter)</li>
+                    </ul>
+                </div>
+
+                <div class="beamsplitter-sim">
+                    <h3>Beamsplitter Simulator</h3>
+                    <div class="input-state">
+                        <h4>Input State</h4>
+                        <div class="state-selector">
+                            <button onclick="setInputState('single')" class="active">Single Photon |10⟩</button>
+                            <button onclick="setInputState('coherent')">Coherent State |α⟩</button>
+                            <button onclick="setInputState('two-photon')">Two Photon |11⟩</button>
+                        </div>
+                    </div>
+
+                    <div class="beamsplitter-controls">
+                        <h4>Beamsplitter Parameters</h4>
+                        <div class="control-group">
+                            <label>Target Operation:</label>
+                            <select id="operation-select" onchange="updateOperation()">
+                                <option value="swap">State Transfer (θ = 90°)</option>
+                                <option value="entangle">Entanglement (θ = 45°)</option>
+                                <option value="custom">Custom Angle</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group" id="custom-angle-control" style="display: none;">
+                            <label>Custom Angle θ: <span id="custom-theta">45</span>°</label>
+                            <input type="range" id="theta-slider" min="0" max="90" value="45" onchange="updateCustomAngle()">
+                        </div>
+                    </div>
+
+                    <div class="evolution-display">
+                        <h4>Quantum Evolution</h4>
+                        <canvas id="evolution-canvas" width="600" height="400"></canvas>
+                        <div class="time-control">
+                            <label>Evolution Time: <span id="time-value">0</span> ns</label>
+                            <input type="range" id="time-slider" min="0" max="1000" value="0" onchange="updateEvolution()">
+                            <button onclick="animateEvolution()">▶️ Animate</button>
+                        </div>
+                    </div>
+
+                    <div class="results-panel">
+                        <h4>Results</h4>
+                        <div id="beamsplitter-results">
+                            <p>Cavity 1 Population: <span id="pop1">1.00</span></p>
+                            <p>Cavity 2 Population: <span id="pop2">0.00</span></p>
+                            <p>Bus Population: <span id="popbus">0.00</span></p>
+                            <p>Transfer Efficiency: <span id="efficiency">--</span>%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-box">
+                    <h3>🧪 Challenge: Perfect State Transfer</h3>
+                    <p>Configure the beamsplitter to achieve >99% transfer efficiency from cavity 1 to cavity 2.</p>
+                    <div class="challenge-controls">
+                        <label>Your Detuning $\Delta/g$: </label>
+                        <input type="number" id="challenge-detuning" step="0.1" value="0">
+                        <button onclick="checkTransferChallenge()">Test Transfer</button>
+                    </div>
+                    <div id="challenge-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Detection Level -->
+        <div id="error-detection-level" class="level">
+            <h2>🛡️ Error Detection & Quantum Error Correction</h2>
+            
+            <div class="error-theory">
+                <h3>Cat Code Encoding</h3>
+                <div class="equation-box">
+                    $$|0\rangle_L \propto (|\alpha\rangle - |i\alpha\rangle + |-\alpha\rangle - |-i\alpha\rangle)$$
+                    $$|1\rangle_L \propto (|\alpha\rangle + |i\alpha\rangle + |-\alpha\rangle + |-i\alpha\rangle)$$
+                </div>
+                <p>Four-component cat code with definite photon number parity for error detection.</p>
+
+                <h3>Error Detection via Parity Measurement</h3>
+                <div class="equation-box">
+                    $$\hat{P} = (-1)^{\hat{n}} = \sum_{n=0}^{\infty} (-1)^n |n\rangle\langle n|$$
+                </div>
+                <p>Parity operator detects single-photon loss events that change even ↔ odd photon number.</p>
+            </div>
+
+            <div class="error-sim">
+                <h3>Error Detection Simulator</h3>
+                
+                <div class="encoding-setup">
+                    <h4>Choose Encoding</h4>
+                    <div class="encoding-selector">
+                        <button onclick="setEncoding('fock')" class="active">Fock Encoding |0⟩, |1⟩</button>
+                        <button onclick="setEncoding('cat')">Cat Code Encoding</button>
+                    </div>
+                    
+                    <div id="cat-parameters" style="display: none;">
+                        <label>Cat Size α: <span id="alpha-value">1.3</span></label>
+                        <input type="range" id="alpha-slider" min="0.5" max="2.5" step="0.1" value="1.3" onchange="updateAlpha()">
+                        <p>Average photon number: $\bar{n} = $ <span id="avg-photons">1.69</span></p>
+                    </div>
+                </div>
+
+                <div class="quantum-channel">
+                    <h4>Quantum Channel with Loss</h4>
+                    <div class="channel-controls">
+                        <label>Loss Probability: <span id="loss-prob">0.16</span></label>
+                        <input type="range" id="loss-slider" min="0" max="0.5" step="0.01" value="0.16" onchange="updateLoss()">
+                    </div>
+                    
+                    <div class="channel-diagram">
+                        <div class="input-state-box">Input State</div>
+                        <div class="channel-box">Lossy Channel</div>
+                        <div class="output-state-box">Output State</div>
+                        <div class="measurement-box">Parity Measurement</div>
+                    </div>
+                </div>
+
+                <div class="fidelity-analysis">
+                    <h4>Fidelity Analysis</h4>
+                    <canvas id="fidelity-canvas" width="500" height="300"></canvas>
+                    
+                    <div class="fidelity-results">
+                        <div class="fidelity-metric">
+                            <label>Uncorrected Fidelity:</label>
+                            <span id="uncorrected-fidelity">--</span>
+                        </div>
+                        <div class="fidelity-metric">
+                            <label>Error-Tracked Fidelity:</label>
+                            <span id="tracked-fidelity">--</span>
+                        </div>
+                        <div class="fidelity-metric">
+                            <label>Improvement Factor:</label>
+                            <span id="improvement-factor">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="parity-challenge">
+                    <h3>🧪 Challenge: Optimize Cat Code</h3>
+                    <p>Find the optimal cat size α that maximizes error-corrected fidelity for 16% loss.</p>
+                    <div class="optimization-game">
+                        <canvas id="optimization-canvas" width="600" height="300"></canvas>
+                        <div class="optimization-controls">
+                            <label>Your α value: </label>
+                            <input type="number" id="optimization-alpha" step="0.1" value="1.0" min="0.5" max="2.5">
+                            <button onclick="testOptimization()">Test This α</button>
+                        </div>
+                        <div id="optimization-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entanglement Level -->
+        <div id="entanglement-level" class="level">
+            <h2>🔗 Quantum Entanglement Generation</h2>
+            
+            <div class="entanglement-theory">
+                <h3>Hong-Ou-Mandel Interference</h3>
+                <div class="equation-box">
+                    $$|11\rangle \xrightarrow{\text{50:50 BS}} \frac{1}{\sqrt{2}}(|20\rangle + |02\rangle)$$
+                </div>
+                <p>Two indistinguishable photons interfere destructively, creating a two-photon Bell state.</p>
+
+                <h3>Error Detection Protocol</h3>
+                <div class="equation-box">
+                    $$\text{Success: Both cavities even parity} \Rightarrow \text{Success probability} = 0.79$$
+                    $$\text{Failure: Single photon loss} \Rightarrow |10\rangle \text{ or } |01\rangle$$
+                </div>
+            </div>
+
+            <div class="entanglement-lab">
+                <h3>Entanglement Laboratory</h3>
+                
+                <div class="protocol-selector">
+                    <h4>Choose Protocol</h4>
+                    <button onclick="setEntanglementProtocol('single')" class="active">Single Photon Bell State</button>
+                    <button onclick="setEntanglementProtocol('hom')">Hong-Ou-Mandel (Two Photon)</button>
+                    <button onclick="setEntanglementProtocol('repeated')">Repeated HOM Protocol</button>
+                </div>
+
+                <div class="entanglement-setup">
+                    <div class="input-preparation">
+                        <h4>State Preparation</h4>
+                        <div id="single-prep" class="prep-method active">
+                            <p>Prepare: $|10\rangle$ (single photon in cavity 1)</p>
+                            <p>Target: $\frac{1}{\sqrt{2}}(|10\rangle + |01\rangle)$</p>
+                        </div>
+                        <div id="hom-prep" class="prep-method">
+                            <p>Prepare: $|11\rangle$ (one photon in each cavity)</p>
+                            <p>Target: $\frac{1}{\sqrt{2}}(|20\rangle + |02\rangle)$</p>
+                        </div>
+                        <div id="repeated-prep" class="prep-method">
+                            <p>Multiple attempts with error recovery</p>
+                            <p>Success probability → 95% with 3 attempts</p>
+                        </div>
+                    </div>
+
+                    <div class="beamsplitter-operation">
+                        <h4>50:50 Beamsplitter Operation</h4>
+                        <div class="operation-visual">
+                            <canvas id="entanglement-canvas" width="400" height="300"></canvas>
+                        </div>
+                        <button onclick="performEntanglement()">🔗 Create Entanglement</button>
+                    </div>
+                </div>
+
+                <div class="entanglement-characterization">
+                    <h4>Entanglement Characterization</h4>
+                    
+                    <div class="tomography-setup">
+                        <h5>Two-Qubit State Tomography</h5>
+                        <div class="basis-measurements">
+                            <div class="measurement-basis">
+                                <label>Cavity 1 Basis:</label>
+                                <select id="basis1-select">
+                                    <option value="Z">Z (|0⟩/|1⟩)</option>
+                                    <option value="X">X (|+⟩/|-⟩)</option>
+                                    <option value="Y">Y (|+i⟩/|-i⟩)</option>
+                                </select>
+                            </div>
+                            <div class="measurement-basis">
+                                <label>Cavity 2 Basis:</label>
+                                <select id="basis2-select">
+                                    <option value="Z">Z (|0⟩/|1⟩)</option>
+                                    <option value="X">X (|+⟩/|-⟩)</option>
+                                    <option value="Y">Y (|+i⟩/|-i⟩)</option>
+                                </select>
+                            </div>
+                            <button onclick="performTomography()">📊 Measure</button>
+                        </div>
+                    </div>
+
+                    <div class="pauli-expectations">
+                        <h5>Pauli Operator Expectations</h5>
+                        <canvas id="pauli-canvas" width="500" height="400"></canvas>
+                    </div>
+
+                    <div class="fidelity-metrics">
+                        <h5>Bell State Fidelity</h5>
+                        <div class="fidelity-display">
+                            <div class="metric">
+                                <label>Single Photon Fidelity:</label>
+                                <span id="single-bell-fidelity">88%</span>
+                            </div>
+                            <div class="metric">
+                                <label>Two Photon Fidelity:</label>
+                                <span id="two-bell-fidelity">94%</span>
+                            </div>
+                            <div class="metric">
+                                <label>Error Reduction Factor:</label>
+                                <span id="error-reduction">2×</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entanglement-challenge">
+                    <h3>🧪 Challenge: Entanglement Optimization</h3>
+                    <p>Design a protocol to maximize Bell state fidelity while minimizing failure rate.</p>
+                    
+                    <div class="protocol-design">
+                        <div class="parameter-tuning">
+                            <label>Bus Quality Factor Q: </label>
+                            <input type="range" id="q-factor-slider" min="10000" max="100000" step="5000" value="51000">
+                            <span id="q-factor-value">51000</span>
+                        </div>
+                        <div class="parameter-tuning">
+                            <label>Conversion Rate g/2π (MHz): </label>
+                            <input type="range" id="conv-rate-slider" min="0.2" max="1.5" step="0.1" value="0.56">
+                            <span id="conv-rate-value">0.56</span>
+                        </div>
+                        <button onclick="optimizeEntanglement()">🎯 Optimize Protocol</button>
+                    </div>
+                    
+                    <div id="entanglement-optimization-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Design Level -->
+        <div id="network-level" class="level">
+            <h2>🌐 Quantum Network Design</h2>
+            
+            <div class="network-theory">
+                <h3>Scalable Network Architecture</h3>
+                <div class="equation-box">
+                    $$\text{Bus Resonator Quality: } Q = \frac{\omega_b}{\kappa_b} = 51{,}000$$
+                    $$\text{Attenuation Length: } L_{att} = 300 \text{ m}$$
+                </div>
+                
+                <h3>Multi-Module Connectivity</h3>
+                <p>Standing wave bus resonator enables bidirectional communication between multiple modules.</p>
+            </div>
+
+            <div class="network-designer">
+                <h3>Network Architecture Designer</h3>
+                
+                <div class="network-canvas-container">
+                    <canvas id="network-canvas" width="800" height="500"></canvas>
+                    <div class="network-controls">
+                        <button onclick="addModule()">➕ Add Module</button>
+                        <button onclick="addBusResonator()">🔗 Add Bus</button>
+                        <button onclick="clearNetwork()">🗑️ Clear All</button>
+                        <button onclick="simulateNetwork()">⚡ Simulate</button>
+                    </div>
+                </div>
+
+                <div class="module-config">
+                    <h4>Module Configuration</h4>
+                    <div class="config-panel">
+                        <div class="module-params">
+                            <label>Cavity Frequency (GHz): </label>
+                            <input type="number" id="cavity-freq" value="6.51" step="0.01">
+                        </div>
+                        <div class="module-params">
+                            <label>Quality Factor: </label>
+                            <input type="number" id="cavity-q" value="300000" step="10000">
+                        </div>
+                        <div class="module-params">
+                            <label>Conversion Rate g/2π (MHz): </label>
+                            <input type="number" id="module-g" value="0.56" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bus-config">
+                    <h4>Bus Resonator Configuration</h4>
+                    <div class="config-panel">
+                        <div class="bus-params">
+                            <label>Bus Length (cm): </label>
+                            <input type="number" id="bus-length" value="6.6" step="0.1">
+                        </div>
+                        <div class="bus-params">
+                            <label>Bus Quality Factor: </label>
+                            <input type="number" id="bus-q" value="51000" step="1000">
+                        </div>
+                        <div class="bus-params">
+                            <label>Harmonic Mode: </label>
+                            <select id="harmonic-mode">
+                                <option value="1">Fundamental</option>
+                                <option value="3" selected>Third Harmonic</option>
+                                <option value="5">Fifth Harmonic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="network-analysis">
+                    <h4>Network Performance Analysis</h4>
+                    <div class="performance-metrics">
+                        <div class="metric-display">
+                            <label>Total Modules:</label>
+                            <span id="total-modules">0</span>
+                        </div>
+                        <div class="metric-display">
+                            <label>Network Diameter:</label>
+                            <span id="network-diameter">--</span>
+                        </div>
+                        <div class="metric-display">
+                            <label>Average Transfer Fidelity:</label>
+                            <span id="avg-fidelity">--</span>
+                        </div>
+                        <div class="metric-display">
+                            <label>Entanglement Rate:</label>
+                            <span id="entangle-rate">--</span>
+                        </div>
+                    </div>
+
+                    <div class="scaling-analysis">
+                        <h5>Scaling Analysis</h5>
+                        <canvas id="scaling-canvas" width="600" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="network-challenge">
+                    <h3>🧪 Challenge: Optimal Network Design</h3>
+                    <p>Design a 5-module network that maximizes connectivity while maintaining >90% fidelity.</p>
+                    
+                    <div class="design-constraints">
+                        <h4>Design Constraints:</h4>
+                        <ul>
+                            <li>Total cable length ≤ 1 meter</li>
+                            <li>Minimum transfer fidelity: 90%</li>
+                            <li>Maximum 3 bus resonators</li>
+                            <li>All modules must be connected</li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="evaluateNetworkDesign()">🎯 Evaluate Design</button>
+                    <div id="network-evaluation-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Challenge Level -->
+        <div id="challenge-level" class="level">
+            <h2>🎯 Ultimate Quantum Network Challenge</h2>
+            
+            <div class="final-challenge">
+                <h3>Mission: Design the Perfect Quantum Communication Protocol</h3>
+                <p class="mission-brief">
+                    You are tasked with designing a quantum communication protocol that demonstrates
+                    all the key concepts from the research paper. Your protocol must achieve:
+                </p>
+                
+                <div class="mission-objectives">
+                    <h4>Mission Objectives:</h4>
+                    <div class="objective-list">
+                        <div class="objective" id="obj1">
+                            <span class="objective-icon">📡</span>
+                            <span class="objective-text">State transfer with >92% fidelity</span>
+                            <span class="objective-status">❌</span>
+                        </div>
+                        <div class="objective" id="obj2">
+                            <span class="objective-icon">🛡️</span>
+                            <span class="objective-text">Error detection with cat codes</span>
+                            <span class="objective-status">❌</span>
+                        </div>
+                        <div class="objective" id="obj3">
+                            <span class="objective-icon">🔗</span>
+                            <span class="objective-text">Bell state fidelity >90%</span>
+                            <span class="objective-status">❌</span>
+                        </div>
+                        <div class="objective" id="obj4">
+                            <span class="objective-icon">⚡</span>
+                            <span class="objective-text">Protocol time <10 μs</span>
+                            <span class="objective-status">❌</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="protocol-designer">
+                    <h4>Protocol Designer</h4>
+                    
+                    <div class="protocol-steps">
+                        <div class="step-designer">
+                            <h5>Step 1: Choose Encoding</h5>
+                            <select id="final-encoding">
+                                <option value="fock">Fock Encoding |0⟩, |1⟩</option>
+                                <option value="cat">Cat Code (α = 1.3)</option>
+                                <option value="optimized-cat">Optimized Cat Code</option>
+                            </select>
+                        </div>
+
+                        <div class="step-designer">
+                            <h5>Step 2: Configure Beamsplitter</h5>
+                            <div class="beamsplitter-config">
+                                <label>Target Angle θ: </label>
+                                <input type="number" id="final-theta" value="90" min="0" max="90">°
+                                
+                                <label>Detuning Δ/g: </label>
+                                <input type="number" id="final-detuning" value="0" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="step-designer">
+                            <h5>Step 3: Error Detection Strategy</h5>
+                            <select id="error-strategy">
+                                <option value="none">No Error Detection</option>
+                                <option value="parity">Parity Measurement</option>
+                                <option value="tracking">Error Tracking</option>
+                                <option value="correction">Active Error Correction</option>
+                            </select>
+                        </div>
+
+                        <div class="step-designer">
+                            <h5>Step 4: Entanglement Protocol</h5>
+                            <select id="entanglement-strategy">
+                                <option value="single-photon">Single Photon Bell State</option>
+                                <option value="hom">Hong-Ou-Mandel</option>
+                                <option value="repeated-hom">Repeated HOM</option>
+                                <option value="custom">Custom Protocol</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="protocol-simulation">
+                        <h4>Full Protocol Simulation</h4>
+                        <div class="simulation-display">
+                            <canvas id="protocol-canvas" width="700" height="400"></canvas>
+                        </div>
+                        
+                        <div class="simulation-controls">
+                            <button onclick="runFullProtocol()" class="primary-button">🚀 Run Complete Protocol</button>
+                            <button onclick="stepThroughProtocol()">👣 Step Through</button>
+                            <button onclick="optimizeProtocol()">🎯 Auto-Optimize</button>
+                        </div>
+                    </div>
+
+                    <div class="performance-dashboard">
+                        <h4>Performance Dashboard</h4>
+                        <div class="dashboard-grid">
+                            <div class="performance-card">
+                                <h5>State Transfer</h5>
+                                <div class="metric-value" id="final-transfer-fidelity">--</div>
+                                <div class="metric-label">Fidelity</div>
+                            </div>
+                            <div class="performance-card">
+                                <h5>Bell State</h5>
+                                <div class="metric-value" id="final-bell-fidelity">--</div>
+                                <div class="metric-label">Fidelity</div>
+                            </div>
+                            <div class="performance-card">
+                                <h5>Protocol Time</h5>
+                                <div class="metric-value" id="final-protocol-time">--</div>
+                                <div class="metric-label">μs</div>
+                            </div>
+                            <div class="performance-card">
+                                <h5>Success Rate</h5>
+                                <div class="metric-value" id="final-success-rate">--</div>
+                                <div class="metric-label">%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theoretical-comparison">
+                        <h4>Comparison with Theoretical Limits</h4>
+                        <canvas id="comparison-canvas" width="600" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div id="final-results" class="results-summary" style="display: none;">
+                    <h3>🏆 Mission Results</h3>
+                    <div id="mission-score"></div>
+                    <div id="physics-insights"></div>
+                    <div class="next-steps">
+                        <h4>Explore Further:</h4>
+                        <ul>
+                            <li>Study the original paper's appendices for implementation details</li>
+                            <li>Investigate other quantum error correction codes</li>
+                            <li>Design protocols for larger networks</li>
+                            <li>Consider real-world experimental limitations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div id="score-display">
+            <h3>🏆 Progress</h3>
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <span class="score-label">Theory Understanding:</span>
+                    <span class="score-value" id="theory-score">0/100</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Practical Skills:</span>
+                    <span class="score-value" id="practical-score">0/100</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Problem Solving:</span>
+                    <span class="score-value" id="problem-score">0/100</span>
+                </div>
+                <div class="score-item total">
+                    <span class="score-label">Total Score:</span>
+                    <span class="score-value" id="total-score">0/300</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

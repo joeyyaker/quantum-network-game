@@ -1,0 +1,2250 @@
+PRX QUANTUM 2,030321 (2021)
+Editors’ Suggestion Featured in Physics
+Error-Detected State Transfer and Entanglement in a Superconducting
+Quantum Network
+Luke D. Burkhart ,1,2,*,‡James D. Teoh,1,2Yaxing Zhang,1,2Christopher J. Axline ,1,2,§
+Luigi Frunzio ,1,2M.H. Devoret,1,2Liang Jiang,1,2,3S.M. Girvin ,1,2and R.J. Schoelkopf1,2,†
+1Departments of Applied Physics and Physics, Yale University, New Haven, Connecticut 06520, USA
+2Yale Quantum Institute, New Haven, Connecticut 06520, USA
+3Pritzker School of Molecular Engineering, The University of Chicago, Illinois 60637, USA
+ (Received 22 May 2020; revised 13 June 2021; accepted 14 July 2021; published 5 August 2021)
+Microwave photons are used to wire up modular quantum processors, but mitigating the eﬀects of loss
+between modules remains a crucial challenge. We use a low-loss bus resonator to couple bosonic qubitsacross a superconducting network with protocols made robust to photon loss in the bus. We transfer a
+multiphoton qubit and track loss events, improving the ﬁdelity to the break-even point with respect to the
+best uncorrectable encoding. We also demonstrate a entanglement protocol using Hong-Ou-Mandel inter-ference and error detection to prepare a two-photon Bell state with ﬁdelity 94% and success probability
+0.79, halving the error obtained with a single photon. This network link also presents new opportunities
+for resource-eﬃcient direct gates between modules.
+DOI: 10.1103/PRXQuantum.2.030321
+I. INTRODUCTION
+Modular networks are a promising paradigm for
+increasingly complex quantum devices, wherein inde-
+pendent processor elements can be operated in con-
+cert by transferring qubits and generating entanglement
+between modules [ 1–3]. These tasks require a low-loss,
+high-speed intermodule link that enables extensible net-
+work connectivity. Satisfying these demands simultane-
+ously remains an outstanding goal for optical quantum
+networks [ 4,5] as well as for modular superconduct-
+ing processors. In particular, modular networks must
+address the problem of ineﬃciencies in signal cou-
+pling, transmission, routing, and receiving, both by min-
+imizing losses in these stages and by mitigating the
+impact of loss on operation ﬁdelities. Both optical ﬁber
+and microwave transmission line can be very eﬃcient
+transmission channels, with energy transmission loss
+*luke.burkhart@yale.edu
+†robert.schoelkopf@yale.edu
+‡Present address: Quantum R&D Center, Keysight Technolo-
+gies Inc., Cambridge, Massachusetts 02142, USA
+§Present address: Institute for Quantum Electronics, ETH
+Zürich, Otto-Stern-Weg 1, Zürich 8093, Switzerland
+Published by the American Physical Society under the terms of
+theCreative Commons Attribution 4.0 International license. Fur-
+ther distribution of this work must maintain attribution to the
+author(s) and the published article’s title, journal citation, and
+DOI.over a meter of superconducting cable as low as 10−3
+(Ref. [ 6]).
+Circuit quantum electrodynamics (cQED) combines the
+low loss of superconducting transmission lines with eﬃ-
+cient switchable couplings between qubits and microwave
+photons [ 7–9], making it a promising platform for modular
+quantum computing. However, robust and scalable net-
+works require communication protocols with performance
+beyond even small losses. Towards this end, schemes that
+condition on successful transmission with an ancillary
+herald are employed in both optical [ 5] and microwave
+networks [ 8,10], albeit at the cost of reduced operation
+rate. The cQED toolkit also enables quantum nondemoli-
+tion (QND) measurement of multiphoton bosonic qubits
+for deterministic correction of loss [ 11], though realiza-
+tion of this approach for communication has remained an
+outstanding challenge [ 12,13].
+Thus far, many cQED network realizations have been
+unable to leverage the intrinsic quality of superconduct-
+ing cable owing to a reliance on lossy directional elements
+such as circulators, used to facilitate communication with
+propagating photons [ 8,13–17]. In contrast, intermodule
+links that forgo directional elements can have much lower
+loss and are bidirectional, supporting a standing-mode
+structure [ 18,19]. A single mode can be used as a quan-
+tum bus [ 20,21], potentially connecting several modules
+[Fig. 1(a)]. This simple link provides features that are not
+available in a directional channel, such as interference of
+photons from diﬀerent modules. When the bus connects
+two bosonic modes ˆa1,2, this interference can give rise to
+2691-3399/21/2(3)/030321(27) 030321-1 Published by the American Physical Society
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+an eﬀective beamsplitter transformation:
+ˆa1→cosθˆa1+sinθˆa2,
+ˆa2→cosθˆa2−sinθˆa1,(1)
+where the beamsplitter angle θcontrols the amount of
+mode mixing in the operation. The beamsplitter is a pow-
+erful tool for manipulating and entangling propagating
+photons [ 22,23], and has proven useful for entanglement
+and gates between bosonic quantum memories [ 24–26].
+In this article, we present two advances in networking
+superconducting modular processors: (1) error-corrected
+transfer of a qubit between two modules at the break-
+even point; and (2) an entanglement protocol which uses
+error detection to achieve higher ﬁdelity than previously
+demonstrated. These protocols rely on two ingredients: a
+method of linking modules using a low-loss coaxial bus
+that avoids the loss of circulators; and the use of multi-
+photon bosonic qubits. With these two elements, we enact
+a low-loss tunable beamsplitter for microwave photons
+in diﬀerent stations, and leverage their bosonic properties
+to make errors detectable. In addition to facilitating the
+construction of modular networks with improved opera-
+tions, this work introduces an outlook for gates that do not
+require a separate means of entanglement [ 26,27].
+II. A TUNABLE BEAMSPLITTER OVER THE
+QUANTUM NETWORK BUS
+As a simple demonstration of the quantum network bus,
+we connect two modules with a superconducting coaxial
+cable of length l=6.6 cm, though this technique extends
+to longer links (see Appendix C3). We choose the third
+harmonic ( l=3λ/2) of the cable as the bus, shown in
+Fig. 1(b). Constructed without lossy microwave compo-
+nents or connectors, this mode has a relatively high quality
+factor ( Q=51,000; κb/2π=110 kHz). Each module con-
+tains a 3D cavity bosonic qubit coupled to the bus via a
+conversion transmon [ 28]. When the transmon is driven
+by two oﬀ-resonant pumps with frequency diﬀerence close
+to the diﬀerence between the cavity ( ˆaj) and bus ( ˆb)f r e -
+quencies, the Josephson nonlinearity enables parametric
+conversion [ 9,29] of the form
+Hj//planckover2pi1=ge−i/Delta1jtˆa†
+jˆb+g∗ei/Delta1jtˆajˆb†.( 2 )
+The pump amplitudes control the conversion rate g,a n d
+their frequencies set the detuning /Delta1jfrom the frequency-
+matching condition.
+An important consideration when utilizing this cou-
+pling is to ensure that no information is left in the busat the end of the protocol. When conversion is activated
+in both modules simultaneously, the resulting three-mode
+system allows bidirectional population transfer in which
+the bus begins and ends in the vacuum state [Figs. 1(c)TimeOccupation(d)
+Time(c)(b)(a)
+FIG. 1. The quantum bus in a modular network. (a) Modules
+are connected via a standing mode of a transmission line orwaveguide structure that serves as a quantum bus (blue). A con-
+version element (green switch) allows gated interaction (purple
+arrow) between each module and the bus. (b) Circuit quantum
+electrodynamic implementation. The bus ˆbis the second over-
+tone of a section of superconducting coaxial cable. Each modulecontains a 3D cavity ˆa
+jcoupled to the bus mode via paramet-
+ric conversion, facilitated by a conversion transmon (green),
+and induced by a pair of microwave drives applied to a con-version transmon through a dedicated drive port (not shown,
+see Fig. 7). Modules contain an ancilla transmon and readout
+resonator (gray) for state preparation, error detection, and tomog-raphy. (c) Simultaneous parametric conversion between each
+cavity and the bus enables eﬀective interaction between the two
+cavity modes. Symmetric detuning of conversion in both mod-ules controls the participation of the bus mode (vertical axis
+representing energy not to scale). (d) Sketch of the dynamics of
+the three mode system for zero detuning (top), transferring anexcitation from cavity 1 to 2. Midway through transfer, occupa-
+tion of the bus is signiﬁcant. For large detuning (bottom), the bus
+is eliminated at all times, but the interaction is much slower (time
+axes not to scale). However, even at zero detuning, there is a time
+(ﬁnal point) where the bus occupation returns to zero, eﬀectivelyeliminating the bus for any input state.
+and1(d)], satisfying this requirement. However, constant
+resonant conversion ( /Delta11=/Delta12=0) is not well suited for
+entanglement by partial transfer, because halfway throughtransfer the occupation of the bus is maximized, leaving
+it entangled with the cavities. There are solutions to this
+problem that involve modulating the coupling strengths in
+time, such as stimulated Raman by adiabatic passage [ 30],
+030321-2
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+but this approach does not allow the full range of inter-
+ference eﬀects utilized here (see Appendix B6). Instead,
+we choose to use equal, nonzero detuning in both mod-
+ules (/Delta11=/Delta12=/Delta1). The best-known case is the vir-
+tual Raman regime /Delta1/greatermuchg, where the bus occupation is
+suppressed, eﬀectively eliminating it from the dynamics,
+resulting in the beamsplitter evolution of Eq. (1)between
+the cavities. This elimination suppresses inﬁdelity due to
+loss in the bus, but lengthens the protocol signiﬁcantly,
+an unfavorable tradeoﬀ when other sources of decoherence
+demand faster operations.
+We address these concerns by working at intermediate
+detuning /Delta1∼g, where the beamsplitter transformation in
+Eq.(1)can be constructed with any mixing angle θwith-
+out slowing down the protocol. We take the conversion
+rate as ﬁxed, because it is usually limited by experimental
+constraints, and use detuning as a control parameter. For
+a given detuning, the bus returns to vacuum and is elim-
+inated periodically, with period τBS=2π//radicalbig
+8g2+/Delta12.
+Thus, the evolution is a linear transformation on the two
+cavities of the form of Eq. (1), with beamsplitter angle
+θ(/Delta1)=π
+2/parenleftbigg
+1−/Delta1τBS
+2π/parenrightbigg
+,( 3 )
+(see Appendix B). This operation, tunable from opaque
+to transparent, is equivalent to a physical beamsplitter
+for propagating photons as depicted in Fig. 2(a), but we
+emphasize that here this evolution applies to two stationary
+modes, whose initial (ﬁnal) states are represented by the
+input to (output from) the beamsplitter. By relying on para-
+metric conversion and a high-quality bus, this scheme has
+the beneﬁt compared with previous experiments [ 8,13–19]
+of not requiring precise frequency matching or tunability.
+We apply this idea to eliminate the bus at two beam-
+splitter working points: fully transparent for state transfer,
+and 50:50 for entanglement generation. We prepare a sin-
+gle photon in cavity 1, turn on conversion in both modules,
+and measure the occupation of each cavity as a function of
+time, shown in Fig. 2(b),f o r g/2π=560 kHz, the value
+used throughout this work. At zero detuning ( θ=90◦),
+we observe complete excitation transfer between cavities
+inτSWAP=624 ns, with energy transfer eﬃciency η=
+84%. Furthermore, an intermediate detuning /Delta1=√8/3g
+realizes a 50:50 beamsplitter ( θ=45◦), which can gen-
+erate entanglement from separable input states. The time
+to eliminate the bus at this detuning is τ50:50=520 ns,
+demonstrating the advantage of this operating point over
+the much slower virtual Raman regime. The dynamics
+as a function of detuning in Fig. 2(c) demonstrate the
+continuous tunability of this operation.
+Both operations are several hundred times faster than the
+decay rate of either bosonic qubit ( κ−1
+1,2=300, 450 μs),
+so the excitation decay during the beamsplitter is domi-
+nated by dissipation in the bus ( κ−1
+b=1.5μs). The transfer(b)
+(c)(a)
+nn
+0 1 2
+Time ( µs)0.00.20.40.60.81.0P(n = 1)
+0 1 2Cavity 1 Cavity 2 Bus
+0 2 4
+Time ( µs)−202Pump detuning (MHz)Cavity 1
+0 2 4Cavity 2
+0.00.20.40.60.81.0
+P(n = 1)Cavity 1
+Cavity 2
+FIG. 2. Variable beamsplitter by elimination of the bus. (a) An
+eﬀective two-mode beamsplitter transformation between cavitieswith angle θenabled by appropriate choice of conversion detun-
+ing/Delta1and time. A single photon prepared in cavity 1 results
+in population in both cavities, measured after conversion. (b)Left: measured population for resonant conversion to realize state
+exchange. Bus population (line) is inferred from ﬁtting the data
+(circles). Arrow at 624 ns indicates full transfer time, wherecavity 1 and the bus are empty, and population of cavity 2 is
+maximized. Right: partial detuning eﬀects a 50:50 beamsplitter.
+At 520 ns, the bus is eliminated and population of the cavities areequal. (c) Measured populations as a function of detuning and
+time shows crossover from resonant interaction to far-detuned
+virtual Raman. Dashed lines are detunings used in (b). Spurioushigher-order pumped transition is visible around +1.5 MHz. The
+rapid equilibration suggests this is a frequency collision with a
+moderately dissipative package mode or higher-order transitionbetween system modes.
+ineﬃciency due to loss is 1 −η≈κb/2g=11%; thus,
+these operations can be improved in future with increased
+conversion rate or bus quality, which is partly limitedby resistive loss at the interface with the modules (see
+Appendix A2). In addition, excitation events of either con-
+version transmon due to thermal or pump-induced transi-
+tions [ 29] dispersively shift the bus and cavity frequencies,
+030321-3
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+eﬀectively turning oﬀ conversion and dephasing the cav-
+ity. These events are responsible for an additional 3–4%
+ineﬃciency, but could be mitigated with a diﬀerent type
+of conversion element [ 31]. The value of gused here is
+a tradeoﬀ between speed, which reduces loss errors, and
+excitation errors induced by the pumps; an element which
+makes this tradeoﬀ more favorable can in future improve
+the beamsplitter.
+III. ERROR-TRACKED QUBIT TRANSFER
+To characterize the bus as a communication link, we turn
+to the task of state transfer, an operation which can move
+qubits between modules for local processing or entan-
+glement distribution. We demonstrate transfer of a single
+qubit from one module to another; however, the link is
+bidirectional and linear, allowing simultaneous two-way
+transfer for any input states. The simplest encoding is the
+Fock basis: presence or absence of a single photon. We pre-
+pare a known superposition α|0/angbracketright+β|1/angbracketrightin cavity 1, apply
+the 90◦beamsplitter, and perform Wigner tomography on
+the resulting state in cavity 2 [Fig. 3(c)]. This protocol is
+performed for six input states, two of which are shown in
+Fig. 3(b). The resulting mean state ﬁdelity, reconstructed
+using maximal likelihood estimation (MLE; see Appendix
+D3), is¯FFock=92(1)%, the average ﬁdelity with which an
+arbitrary quantum state is transferred.This protocol yields signiﬁcant improvement over pre-
+vious experiments which relied on directional communica-
+tion links [ 13,16], but the performance remains dominated
+by loss in the bus. We demonstrate suppression of this
+source of inﬁdelity by leveraging strategies for correcting
+photon loss in stationary memories [ 11,12,32]. Because the
+cavities and the bus are all harmonic oscillators, we use an
+encoding which detects loss in any of these modes with a
+single measurement. We choose the cat code [ 32], super-
+positions of four coherent states with even photon number
+parity, and add a QND parity measurement using an ancilla
+transmon prior to Wigner tomography [Fig. 3(c)]. The cat
+code employed here is chosen to contain on average ¯n≈
+1.7 photons, more than three times as many as the Fock
+encoding. This increase makes loss events more likely, and
+is the unavoidable overhead of an error-correctable encod-
+ing. Indeed, without error detection, the mean state ﬁdelity
+is¯Fcat=80(1)%<¯FFock(Table III). However, the parity
+measurement can detect loss events, mitigating the impact
+on ﬁdelity and resulting in a net gain.
+By adding the syndrome measurement before tomogra-
+phy, we overcome the overhead to reach the break-even
+point with respect to the Fock encoding. The measured
+Wigner functions sorted by parity outcome are shown in
+Fig.3(d). The dominant outcome is that the parity remains
+even ( peven=0.84), and the ﬁdelity in this no-error case
+is¯Feven=93(1)%. Change in parity denotes a single loss
+(a)
+−202
+−2 0 2−202
+−2 0 2Received Prepared (b)(c)
+P
+ReIm
+ReIm
+−202
+−2 0 2−202
+−2 0 2
+−2 0 2
+(d) Prepared Even Odd()W
+2/π
+–2/π0W W
+FIG. 3. Quantum state transfer via the bus. (a) Pulse sequence for qubit transfer in the single-photon encoding. Qubit is prepared
+in cavity 1, 90◦beamsplitter is applied, and state of cavity 2 is measured via Wigner tomography. (b) Two qubit states, |1/angbracketrightand
+|+x/angbracketright, as prepared in cavity 1, and as received in cavity 2 after the beamsplitter. Prepared states have a deterministic phase shift
+from a measurement which ensures the ancilla transmon is in its ground state after state creation. Received states have an additional
+deterministic phase shift from the conversion process. (c) Transfer of a qubit in the error-correctable cat encoding. After transfer, the
+error syndrome, photon number parity, is measured in cavity 2 prior to Wigner tomography. (d) Logical qubit states |1/angbracketrightLand|+x/angbracketrightLin
+the cat code prepared and received, conditioned on parity measurement outcome. Phase shifts are the same as in (b), but with additional
+rotations of received states owing to the parity measurement, which are diﬀerent for the two outcomes due to dispersive interaction
+with diﬀerent ancilla states.
+030321-4
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+error ( podd=0.16), and we ﬁnd the coherence to be pre-
+served in the odd manifold, with ﬁdelity ¯Fodd=86(3)%.
+This error can be corrected in real time, or the state con-
+ditionally decoded [ 11], but the odd manifold is also a
+valid logical encoding, so future operations may simply
+be updated without feedback correction; hence, the state is
+error-tracked. Averaged over all trials, the resulting deter-
+ministic ﬁdelity is ¯Fcat,tracked =92(2)%, which includes
+encoding and syndrome measurement errors of approxi-
+mately 3% (see Table I). Even in the presence of code
+overhead and these imperfections, the cat code still reaches
+the break-even point at which the transfer ﬁdelity is as high
+as in the Fock encoding. Extending this protocol to include
+active error correction, we add a fed-forward conditional
+decoding procedure, and ﬁnd the performance in this caseto also lie at the break-even point with the Fock code (see
+Fig. 19and Table III). In future, use of a more robust
+parity measurement [ 33] and suppression of conversion
+transmon excitations, an uncorrectable error, should enable
+error-corrected state transfer beyond break-even.
+IV. ENTANGLEMENT GENERATION
+To fulﬁll another key network requirement, we generate
+entangled states between modules, a critical resource for
+nonlocal gates [ 1,34,35] and stabilizer measurements [ 36].
+The 50:50 beamsplitter in Fig. 2(b) can entangle the mod-
+ules for a variety of input states. The simplest input is a
+single photon in one of the cavities ( |10/angbracketright), ideally creat-
+ing the odd-parity Bell state (|10/angbracketright+| 01/angbracketright)/√
+2 [Fig. 4(a)].
+(a)
+X, Y, Z
+−202
+−2 0 2−202
+−2 0 2(b)
+I
+IX
+IY
+IZ
+II
+XI
+YI
+ZXXYXZ
+XXYYYZ
+YX
+ZY
+ZZZ
+Pauli operator−1.0−0.50.00.51.0Expectation value(f)
+I
+IX
+IY
+IZ
+II
+XI
+YI
+ZXXYXZ
+XXYYYZ
+YX
+ZY
+ZZZ
+Pauli operator−1.0−0.50.00.51.0Expectation value(c)0(d)
+P
+P X, Y, Z
+ReIm
+ReImW
+−202
+−2 0 2−202
+−2 0 2
+(e)2/π
+–2/πW W
+FIG. 4. Entanglement generation with a 50:50 beamsplitter. (a) A single photon is prepared in cavity 1, and detuned conversion
+eﬀects a 50:50 beamsplitter. Ideal state and dominant error state are shown in the output. Cavity 2 is measured in a basis chosen
+from{X,Y,Z}, while Wigner tomography is performed on cavity 1. (b) Measured Wigner tomograms of cavity 1, conditioned on
+logical measurement in module 2, in two bases. Inset label indicates measurement basis and outcome; states are anticorrelated in Z
+and correlated in X. Phase shift due to pumps is calibrated out by choice of measurement axis. (c) Reconstructed two-qubit state Pauli
+operator expectation values. Dominant error, polarization towards zero photons ( |+z/angbracketright=| 0/angbracketright), is visible in single qubit observables.
+(d) Two-photon Bell state from Hong-Ou-Mandel interference. One photon is prepared in each cavity as inputs to the 50:50 beamsplit-
+ter. To detect loss events, parity is measured in each cavity simultaneously before tomography. Ideal state and rejected error states are
+shown in beamsplitter output. (e) Conditional Wigner tomograms, postselected on even parity in both cavities. Phase shift in Xbasis
+is deterministic eﬀect of parity measurements and pumps, not calibrated out in this experiment. (f) Reconstructed Pauli expectation
+values for two-photon Bell state.
+030321-5
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+To characterize the entanglement, we perform logical two-
+qubit tomography by measuring the Wigner function of
+one cavity, conditioned on the state of the other (see
+Appendix D4for more detail). We measure cavity 2 in
+one of three logical bases {X,Y,Z}, ideally projecting cav-
+ity 1 into one of the corresponding basis states depending
+on the measurement result. The Wigner function of cavity
+1, measured simultaneously and conditioned on the logical
+measurement outcome, shows the correlations expected of
+an entangled state [Fig. 4(b)]. From these data we recon-
+struct the logical two-qubit state, which has ﬁdelity to
+the ideal Bell state ¯FBell,01=88(1)%, not corrected for a
+2% error in the logical measurement. The reconstructed
+joint Pauli expectation values [Fig. 4(c)] exhibit dominant
+two-qubit correlations, but visible single-qubit polariza-
+tion towards the vacuum state indicates that the inﬁdelity
+results mostly from photon loss in the bus.
+Finally, we implement a scheme for QND detection
+of loss during entanglement generation, which is prob-
+abilistic but results in higher ﬁdelity when successful.
+We apply the 50:50 beamsplitter to the two-photon input
+state|11/angbracketright, ideally producing (|20/angbracketright+| 02/angbracketright)/√
+2, an exam-
+ple of Hong–Ou–Mandel interference [ 37] that relies on
+frequency conversion to make photons indistinguishable
+[25,38]. Single-photon loss during the beamsplitter results
+in odd photon number occupation in one of the cavities
+(either |10/angbracketrightor|01/angbracketright), and can be detected by measuring
+the parity of each cavity, as indicated in Fig. 4(d).A s
+the ideal state has only even number, these measurements
+do not dephase the entangled state. We declare success-
+ful entanglement when both cavities are found to have
+even parity (success probability 0.79), and postselect the
+resulting data. The measured conditional Wigner functions
+in Fig. 4(e) exhibit the expected correlations in the two-
+photon manifold. The reconstructed logical state, shown
+in Fig. 4(f), shows reduced single-qubit polarization com-
+pared with the single-photon protocol, since this would
+only result from loss of two photons, a second-order error.
+The Bell state ﬁdelity, again uncorrected for tomogra-
+phy, is ¯FBell,02=94(1)%, a two-fold reduction of errors
+from the single-photon case, with only a small failure rate,
+which can be improved by reducing loss in the bus. We
+emphasize that this simple and eﬀective protocol is only
+possible with bosonic qubits and a bidirectional bus which
+supports multiple indistinguishable photons.
+This error-detected protocol also admits a simple and
+rapid way to increase the eﬀective success probability.
+Because the state upon failure is known ( |10/angbracketrightor|01/angbracketright),
+we can simply load another photon into the empty cavity
+and reapply the beamsplitter. For instance, with up to three
+entangling attempts, the success probability increases to
+0.95, with only a small decrease in the ﬁdelity to ¯F(3)
+Bell,02=
+91(1)%, with an average entangling time of 5.2 μs,
+20 times faster than the cavity decoherence times (see
+Appendix G). This ability to rapidly generate high-ﬁdelityBell states is an essential feature for teleportation schemes
+using resource entanglement.
+V. CONCLUSION
+We have demonstrated an approach for communica-
+tion in a cQED network with higher performance and a
+wider range of capabilities, showing how both qubit trans-
+fer and entanglement generation can be improved with
+multiphoton encodings and error-detection. Using a single
+error syndrome measurement, we improve the transfer of
+a logical qubit to the break-even point, using deterministic
+quantum error-correction for modular networking. Using
+the same toolkit to detect loss during an entangling oper-
+ation, we generate a Bell state with signiﬁcantly higher
+ﬁdelity than can be obtained with a single photon in the
+same hardware. This platform oﬀers routes towards exten-
+sible networks by coupling several modules to a single
+bus (see Appendix C3), or arraying modules with multiple
+two-port buses.
+The transfer eﬃciency in this experiment is an improve-
+ment over implementations relying on circulators, and can
+be further advanced by identifying and reducing sources
+of loss in the bus, and by employing a better source of
+nonlinearity for parametric conversion. Likely sources
+of loss are resistance in the joints between the mod-
+ules and the bus, and materials used in the bus.
+Joint losses can be mitigated by superconducting coat-
+ings such as indium, which can achieve extremely
+high-quality seams [ 39]. Dielectric or surface losses
+within the bus can be reduced by constructing a
+bus from common materials of higher quality such
+as chemically etched high-purity aluminum [ 40]o r
+waveguide [ 6], with a larger radius to reduce surface
+participations, and with less dielectric material between the
+conductors.
+The capabilities demonstrated here ease the construc-
+tion of modular systems, improve their performance, and
+makes the modular approach to quantum machines more
+powerful and practical. The high-ﬁdelity entanglement
+protocols enable eﬃcient distillation and faithful tele-
+ported operations over the network [ 1,3]. Alternatively,
+error-corrected state transfer permits shuttling of log-
+ical qubits between modules to instead perform local
+entangling gates, and is even robust to thermal noise in
+the bus [ 41]. Finally, a low-loss beamsplitter between
+bosonic qubits in separate modules presents the striking
+opportunity to enact universal gates such as controlled-
+SWAP and exponential-SWAP [ 26,27] directly across
+the network without resource entanglement or shuttling.
+More broadly, the conversion interaction employed hereis a general tool for manipulating bosonic degrees of
+freedom in separate modules, which can be applied for
+boson sampling [ 23,42] and as a tunable hopping term
+for quantum simulation. This diverse set of possibilities
+030321-6
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+in a single platform provides many directions for future
+research towards distributed quantum computing with
+superconducting networks.
+ACKNOWLEDGMENTS
+The authors acknowledge N. Cottet and Y. Lu for
+useful input regarding the article; B. Chapman for pro-
+viding the parametric ampliﬁers used for ancilla readout;
+N. Ofek and P. Reinhold for providing the logic and
+control interface for the ﬁeld programmable gate array
+controller; and C.S. Wang, M.J. Hatridge, and W. Pfaﬀ
+for valuable discussions. This research was supported by
+the U.S. Army Research Oﬃce under grants W911NF-
+18-1-0212 and W911NF-16-1-0349, and by the Air Force
+Oﬃce of Scientiﬁc Research under MURI grant FA9550-
+15-1-0015. L.J. was supported by the Packard Foundation
+(2013-39273) and R.J.S. by a Max Planck Research Award
+from the Alexander von Humboldt Foundation. Fabrica-
+tion facilities use was supported by the Yale Institute
+for Nanoscience and Quantum Engineering (YINQE) and
+the Yale SEAS clean room. R.J.S., M.H.D., and L.F. are
+founders of and R.J.S. and L.F. are equity shareholders of
+Quantum Circuits, Inc.
+Author Contributions
+L.D.B. and J.D.T. designed the experiment with input
+from Y.Z., C.J.A., and R.J.S. L.D.B. and J.D.T. performed
+the experiment and analyzed the data under the supervi-
+sion of R.J.S. L.D.B. and L.F. fabricated the transmon
+qubits. L.J., M.D., and S.M.G. provided theoretical sup-
+port. L.D.B., J.D.T., and R.J.S. wrote the manuscript with
+input from all authors.APPENDIX A: EXPERIMENTAL SETUP
+1. Modules
+Each module is a nominally identical device constructed
+from a solid piece of 99.99% pure aluminum, chemi-
+cally etched as in Ref. [ 40] to improve surface quality.
+Modules consist of a central post cavity [ 28,40] with
+two orthogonal tunnels intersecting the cavity, similar to
+the sample in Ref. [ 43]. One tunnel houses a chip con-
+taining the ancilla transmon, readout resonator, and Pur-
+cell ﬁlter [ 28]. The other tunnel houses a separate chip
+with conversion transmon. This tunnel is intersected by
+another, smaller tunnel, housing the end of the coaxial bus
+resonator (see Appendix A2). All chips are double-
+polished sapphire with aluminum ﬁlms deﬁned by a single
+electron-beam lithography step, and double-angle evapo-
+ration to form the Josephson junctions in a Dolan bridge
+process. Samples are thermally anchored to the base
+stage of a dilution refrigerator at approximately 20 mK,
+with a magnetic shield surrounding the modules and bus.
+Device Hamiltonian parameters and coherence times are
+listed in Table II. Module and chip design is shown in
+Fig.5
+2. Coaxial bus resonator
+Modules are connected by a l=6.6 cm section of com-
+mercial NbTi coaxial cable (Coax Co. SC-086/50-NbTi-
+NbTi) with PTFE dielectric. The cable is a multimode
+resonator with free spectral range 1.9 GHz. The third har-
+monic ( l=3λ/2) is used as the bus in this experiment, as it
+has largest dispersive coupling to the conversion transmon
+by virtue of being close in frequency. The ﬁnal 7.5 mm
+of outer conductor and dielectric is removed from each
+Ancilla
+armConverter
+armBus
+coupling
+Readout
+in/outAncilla
+drive inCavity
+drive in
+Converter
+drive and
+pumps in1 mm
+1 mm(a)
+(c)(b) Ancilla drive in
+Bus coupling0.7 inch
+FIG. 5. Module and chip design. (a) Three-quarter cross section of a module. Post cavity (center) intersected by two tunnels. Labels
+indicate coupling pin locations. (b) Ancilla chip layout shows transmon pads (left) and meander stripline readout (right). Label indi-cates approximate location of ancilla drive port. Readout port and stripline Purcell ﬁlter, located further to the right, not shown. (b)
+Conversion transmon chip layout. Label indicates approximate location of bus coupling pin. Drive port, located further to the right,
+not shown.
+030321-7
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+FIG. 6. Photo of assembled
+modules. Wiring excluded. Sam-
+ple mounted to copper bracketat base of dilution refrigerator.
+Copper braids connect the copper
+chip holders directly to thebracket for chip thermalization.
+end of the cable to expose the inner conductor. The cable
+is inserted in a tunnel in the module, with exposed inner
+conductor near one capacitor pad of the conversion trans-
+mon. The outer conductor is clamped against the body of
+the aluminum module with a brass screw, with a smallamount of bulk indium between screw and cable to pro-
+vide a larger area of contact force. This mounting scheme
+places only two superconducting joints in the path of cur-
+rent ﬂow for the bus mode, one at each end. The outer
+conductor is lightly sanded before assembly to remove
+some of the oxide layer. The quality of this interface is
+irreproducible, and likely limits the quality factor of the
+bus (see Appendix C2). Figure 6illustrates the assembled
+modules and coaxial cable.
+3. Experimental wiring
+Each module has a mostly separate and identical
+drive chain to address all modes and apply the oﬀ-
+resonant pumps to the conversion transmon (see Fig. 7).
+Measurement of the ancilla transmon is performed with
+dispersive readout in reﬂection oﬀ a port which is strongly
+coupled to the Purcell ﬁlter. Readout pulses are sourced
+at room temperature with a continuous-wave generator
+(RF) and fast microwave switch. Reﬂected readout signals
+are ampliﬁed at the base stage by two SNAIL parametric
+ampliﬁers (SPA) [ 44] with approximately 23 dB of gain,
+20 MHz of instantaneous bandwidth, and noise visibility
+ratio of 7 dB. The SPAs are operated in phase-preserving
+mode by detuning the pump from twice the readout fre-
+quency by about 20 MHz. SPA pumps are gated by directly
+pulsing the source generators. Signals are further ampli-
+ﬁed at 4 K (40 dB) and room temperature (30 dB), then
+down-converted to an intermediate frequency (50 MHz)
+by a separate local oscillator (LO). This signal, as wellas a reference signal formed by mixing the RF and LO
+continuously, are ampliﬁed again (14 dB) and digitized
+by a pair of analog-to-digital converters (ADCs). The sig-
+nal and reference are compared on each experimental shot,and the relative trajectory is integrated with an appropriate
+envelope and thresholded to discriminate ancilla states.
+All other input signals are IQ modulated by eight pairs of
+digital-to-analog converters (DACs), ampliﬁed and ﬁltered
+at room temperature. DACs, ADCs, and digital chan-nels are on four Innovative Integration X6-1000M cards,
+which have FPGAs loaded with custom logic. All con-
+trol and measurement lines are additionally ﬁltered at low
+temperature (see Fig. 7).
+4. Pump scheme and phase locking
+Each conversion transmon is driven by a pair of far-
+detuned pumps, applied approximately 100 and 1200 MHz
+above the transmon frequency (called pump Xand pump
+Y, respectively). Mode and pump frequencies are listed in
+Table II. All pump pulses have a constant duration of the
+length quoted in the text, plus a cosine-shaped rise and
+fall, each 48 ns in length. As the overall phase of a trans-
+mitted state depends on the initial phase as well as the
+phase of each of the four pumps, three local oscillators are
+shared between the modules as indicated in Fig. 7.T h e s e
+local oscillators source the cavity drive, pump X,a n d
+pump Yfor both modules. Ancilla and readout input sig-
+nals are created by independent sources. Resonant drives
+for conversion transmons, used only for characterization
+experiments, are sourced by the same drive chain as
+pump X.
+The use of shared LOs between control setups ensure
+the LO phases cancel out in the data. Likewise, the
+phase of the oscillators which control the single-sideband
+(SSB) modulation frequency must also be locked. This
+is ensured by choosing SSB frequencies such that the
+parametric conversion frequency condition ω
+a1+ωX1−
+ωY1=ωa2+ωX2−ωY2is met. This condition guarantees
+that a photon converted from cavity 1 into the bus and outinto cavity 2 acquires the same phase on every experimen-
+tal shot. In addition, the phase of the oscillators which set
+these SSB frequencies are reset at the beginning of every
+experimental shot to remove long-term drifts.
+030321-8
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+Shared for 
+phase locking
+EXXXX GHz low 
+pass filter
+XX dB
+attenuator–XX10 –3010 –20
+–30 10
+12 –30
+12
+–3
+SH–20–20–20–20
+–20
+20 mK
+Cryoperm shield4 KIQ
+DIQ 0.3
+0.3DACLO in
+RF outLRF
+ADC
+LO
+SPA pump–20
+ECavity LO
+Pump Y LO
+Pump X LOAncilla LO
+Circulator
+Isolator
+Cryogenic HEMT 
+amplifierSNAIL parametric 
+amplifierKey:
+Room-temperature
+low-noise amplifier
+Room-temperature 
+power amplifier
+=EccosorbIR filterMicrowave
+switchIQ mixerRF source
+Reference
+Signal
+ADC
+DAC
+E E E
+EE EDS
+H
+L
+FIG. 7. Experimental wiring diagram. Input and output signal lines. Setup is duplicated across vertical dashed line. Three LOs in
+gray are shared between the two halves for phase-locking. Some attenuation and ﬁltering at room temperature not shown.
+5. Crosstalk between modules
+Although the modules used in this experiment are nom-
+inally identical for ease of manufacture, future realizations
+might beneﬁt from intentional asymmetry between the
+modules. The near-degeneracy of the two cavity modes,
+detuned by only 8 MHz, causes a small amount of crosstalk
+between control pulses. We ﬁnd when we displace onecavity with a wide-band pulse, the other is displaced by
+2–3% in amplitude. This may cause small errors in simul-taneous control and tomography, which can be easily mit-
+igated by a small intentional detuning between the two by
+machining the lengths of the posts to be slightly diﬀerent.
+Crosstalk of control signals during joint cavity tomogra-
+phy may contribute to reconstruction errors in the Wigner
+030321-9
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+functions or errors in decoding the cavity state onto the
+transmon. These eﬀects, however, will typically decrease
+the quoted state ﬁdelity and so do not lead to an overes-
+timation. This form of crosstalk could be suppressed by
+including compensation drives in the cavity control pulses.
+The measurement chains for the two modules are com-
+pletely independent, which is an advantage of this experi-
+ment compared with some previous works [ 13–15,17]. As
+a result of this choice, and of the spatial and frequency
+separation of the readout resonators, the ancilla readout
+crosstalk is immeasurably small. The frequency separa-
+tion (about 25 linewidths; Table II) alone would limit
+the expected crosstalk to below 0.5%, and we conﬁrmed
+the absence of crosstalk at this level by measuring one
+ancilla while performing a Rabi contrast measurement on
+the other.
+The strong coupling of the conversion transmons to the
+bus, and their proximity in frequency space, leads to a
+strong dispersive coupling to one another. Owing to the
+situation of the frequencies in the straddling regime [ 45],
+the dispersive shift between the two conversion transmons
+is+2π×2 MHz. As we do not use the conversion trans-
+mons as anything other than a mixing element, this shift
+plays no role, but it could be used to rapidly entangle the
+two modules.
+APPENDIX B: DERIVING THE EFFECTIVE
+BEAMSPLITTER
+1. Conversion Hamiltonian
+The parametric conversion between cavity and bus
+results from a four-wave mixing process as in Ref. [ 9].
+In the frame of the drives, the eﬀective Hamiltonian
+describing the interaction between the bus and both cav-
+ities can be rewritten as
+ˆH//planckover2pi1=igˆa1ˆb†−igˆa†
+1ˆb−igˆa2ˆb†+igˆa†
+2ˆb−/Delta1ˆb†ˆb.( B 1 )
+We take gto be real and equal for both modules, but the
+amplitude and phase is controlled by the amplitudes and
+relative phases of the oﬀ-resonant pumps. In particular, we
+must tune the amplitudes so that gis equal on both sides.
+The common detuning /Delta1of the bus mode is controlled
+by detuning one of the pumps used for each conversion
+interaction away from the conversion resonance by /Delta1. This
+is the detuning in Fig. 2of the main text.
+2. Equations of motion and elimination of the bus
+The lossless dynamics of this bilinear Hamiltonian may
+be readily found by solving the Heisenberg equations ofmotion for ˆa1,ˆa2,a n dˆb:
+˙ˆa1(t)=− gˆb(t)
+˙ˆa2(t)=gˆb(t)
+˙ˆb(t)=g(ˆa1(t)−ˆa1(t))+i/Delta1ˆb(t).(B2)
+As the equations of motion are linear, the solution for the
+ﬁeld operators can be written in matrix form as
+⎛
+⎝ˆa1(t)
+ˆa2(t)
+ˆb(t)⎞
+⎠=⎛
+⎝M11 M12 M13
+M21 M22 M23
+M31 M32 M33⎞
+⎠⎛
+⎝ˆa1(0)
+ˆa2(0)
+ˆb(0)⎞
+⎠,( B 3 )
+with matrix elements
+M11=M22
+=1
+2/bracketleftbigg
+1+ei/Delta1t/2/parenleftbigg
+cos√
+2/Omega1t−i/Delta1√
+8/Omega1sin√
+2/Omega1t/parenrightbigg/bracketrightbigg
+M12=M21
+=1
+2/bracketleftbigg
+1−ei/Delta1t/2/parenleftbigg
+cos√
+2/Omega1t−i/Delta1√
+8/Omega1sin√
+2/Omega1t/parenrightbigg/bracketrightbigg
+M13=− M31=− M23=M32=−g√
+2/Omega1ei/Delta1t/2sin√
+2/Omega1t
+M33=ei/Delta1t/2/parenleftbigg
+cos√
+2/Omega1t+i/Delta1√
+8/Omega1sin√
+2/Omega1t/parenrightbigg
+with/Omega1≡g/radicalBigg
+1+/Delta12
+8g2,( B 4 )
+where we have deﬁned the eﬀective interaction rate /Omega1in
+analogy with detuned vacuum Rabi oscillations. Popula-
+tion thus oscillates between the cavity and bus modes with
+frequency 2√
+2/Omega1, with the amplitude of oscillation pro-
+portional to (g//Omega1)2. In the large detuning limit /Delta1/greatermuchg,
+this amplitude is suppressed, scaling as (g//Delta1)2, a familiar
+result in the context of virtual Raman transitions.
+This exact solution makes it clear that at time t=τsuch
+that√
+2/Omega1τ=kπ(for integer k),M13=M31=M23=
+M32=0. This means that ˆa1(τ)andˆa2(τ)are decoupled
+fromˆb(0),a n dˆb(τ)=ˆb(0), up to an overall phase. This is
+precisely what we mean by the bus being eliminated. The
+ﬁrst time this elimination occurs ( k=1) is
+t=τBS=π√
+2/Omega1=2π/radicalbig
+8g2+/Delta12,( B 5 )
+which we refer to as the beamsplitter time. The solution for
+the ﬁeld operators at the beamsplitter time is
+ˆa1(τBS)=e−iθ/parenleftbig
+ˆa1(0)cosθ+iˆa2(0)sinθ/parenrightbig
+,
+ˆa2(τBS)=e−iθ/parenleftbig
+ˆa2(0)cosθ+iˆa1(0)sinθ/parenrightbig
+,(B6)
+030321-10
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+which is a beamsplitter transformation with mixing angle
+θ=π
+2/parenleftbigg
+1−/Delta1√
+8/Omega1/parenrightbigg
+=π
+2/parenleftBigg
+1−/Delta1/radicalbig
+8g2+/Delta12/parenrightBigg
+=π
+2/parenleftbigg
+1−/Delta1τBS
+2π/parenrightbigg
+.(B7)
+This general result establishes the two working cases used
+in the main text, explained in the next two subappendices.
+3. State transfer and eﬃciency
+The ﬁrst useful working point is used for state transfer.
+By choosing /Delta1=0, we have θ=π/2, which occurs at
+timeτSWAP=π/(√
+2g). This results in evolution
+ˆa1(τSWAP)=ˆa2(0),
+ˆa2(τSWAP)=ˆa1(0),(B8)
+which swaps the state of the two cavities. Our choice of the
+phase of gin Eq. (B1) results in a true SWAP operation at
+these conditions. Any deviation in the phase of gwould
+result in a cavity phase space rotation on one or both of the
+input states, which can be calibrated out in any encoding:
+this is not a logical qubit phase.
+In this case, we can easily include the eﬀect of damp-
+ing in the bus by replacing /Delta1→iκb/2i nE q . (B2).I n
+this case, we replace the detuned Rabi frequency /Omega1with
+the loaded oscillation frequency ˜g=g/radicalBig
+1−κ2
+b/(32g2).
+To compute the energy eﬃciency in the presence of loss,
+it is suﬃcient to consider the case of an input coher-
+ent state |α/angbracketrightin cavity 1, and vacuum in cavity 2, which
+emulates the one-way state transfer demonstrated in the
+main text. In this semiclassical case, it is convenient to
+replace the ﬁeld operators with their expectation values,
+e.g., aj(t)=/angbracketleft ˆaj(t)/angbracketright. The initial conditions are then a1(0)=
+αand a2(0)=b(0)=0. As long as the oscillations are
+underdamped ( κb<√
+32g,˜g∈R), the bus will still peri-
+odically be eliminated. The exact solution for the average
+dynamics is given by
+a1(t)=α
+2/bracketleftbigg
+1+e−κbt/4/parenleftbigg
+cos√
+2˜gt+κb√
+32˜gsin√
+2˜gt/parenrightbigg/bracketrightbigg
+,
+a2(t)=α
+2/bracketleftbigg
+1−e−κbt/4/parenleftbigg
+cos√
+2˜gt+κb√
+32˜gsin√
+2˜gt/parenrightbigg/bracketrightbigg
+,
+b(t)=α√
+2g
+˜ge−κbt/4sin√
+2˜gt,
+(B9)where we drop the operator circumﬂex notation to denote
+the expectation value. For the values used in this exper-
+iment, the loading of the oscillation frequency is a very
+small eﬀect, and ˜g≈gto a very good approximation.
+The energy eﬃciency of the transfer, η, is the energy
+in mode a2at the end of the transfer relative to the initial
+energy in mode a1, and is given by
+η=|a2(τSWAP)|2
+|a1(0)|2≈1
+4/parenleftBig
+1+e(−πκb/√
+32g)/parenrightBig2
+≈1−πκ b√
+32g,
+(B10)
+which is η=0.89 for the experimentally measured values
+ofgandκbquoted in the main text.
+4. Entanglement generation
+The other regime utilized in this work is the 50:50
+beamsplitter ( θ=π/4), which is obtained at /Delta1=g√8/3.
+At this detuning, /Omega1=g√4/3, and the interaction time is
+τ50:50=π√3/8/g=√3/4τSWAP . The resulting operation
+is
+ˆa1(τBS)=1√
+2e−iπ/4/parenleftbig
+ˆa1(0)+iˆa2(0)/parenrightbig
+,
+ˆa2(τBS)=1√
+2e−iπ/4/parenleftbig
+ˆa2(0)+iˆa1(0)/parenrightbig
+,(B11)
+which can produce maximally entangled ﬁnal states for
+certain initial states.
+Loss in the bus will also introduce a ﬁnite eﬃciency in
+theθ=45◦beamsplitter. For a singe-photon input state,
+this eﬃciency is to leading order in κb/g
+1−ηBS=κbg2
+2/Omega12τ50:50
+2=3√
+3π
+8√
+32κb
+g≈0.36κb
+g, (B12)
+which is less loss than the resonant swap because the
+process is faster and populates the bus less.
+As there is only one excitation, the state which results
+from loss is |00/angbracketright. Thus, the above ineﬃciency results in a
+mixture of the ideal Bell state and the vacuum state:
+ρ=ηBS1
+2(|01/angbracketright+| 10/angbracketright)(/angbracketleft01|+/angbracketleft 10|)+(1−ηBS)|00/angbracketright/angbracketleft00|.
+(B13)
+The second term has zero ﬁdelity to the ideal state, thus,
+1−FBell,bus =1−ηBS=3√
+3π
+8√
+32κb
+g≈0.36κb
+g. (B14)
+5. Other sources of error
+Although the dominant source of error in both state
+transfer and entanglement generation are dissipation in the
+030321-11
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+bus, there are a few other smaller contributions, which we
+describe here and summarized in Table I.
+In the case that the storage cavities have identical damp-
+ing rates κa, we may adjust the expressions for ineﬃciency
+to include this eﬀect. In the weak-loss limit, the mean
+occupation of the bus through transfer of one photon is
+approximately one quarter, as can be seen from Eq. (B9).
+Thus, the total occupation of the storage modes is the
+remaining three quarters, three times more populated on
+average. To leading order, this means we should replace
+κbwithκb+3κain expressions for the ineﬃciency and
+inﬁdelity in state transfer. For entanglement protocols the
+eﬀect is similar, but the prefactor on κawill be slightly
+larger owing to the suppression of the bus occupation in
+the detuned regime. In this experiment, the storage dissi-
+pation is two to three orders of magnitude smaller than that
+of the bus in this experiment, which is why we may safely
+neglect the storage decay in our estimates.
+The other major contributor to ineﬃciency is excitation
+of the conversion transmons, which occur at a rate /Gamma1up.
+Due to the large dispersive shift, these events eﬀectively
+turn oﬀ the conversion process, halting the evolution. The
+ineﬃciency due to this eﬀect is of order /Gamma1up×τSWAP per
+transmon. Thus, the total ineﬃciency is of the form
+ηall sources ∼π(κ b+3κa)√
+3g+2/Gamma1upτSWAP . (B15)
+Finally, we observe that the conversion transmon excita-
+tion rate /Gamma1updepends on the strength of the conversion
+pumps, and so grows with the conversion rate g.F o r
+example, the pumping used for the conversion can enable
+parasitic processes that couple the converter, the storage
+cavities, or the bus to other unwanted modes or sources
+of dissipation. The details of this process depend on many
+properties of the system and are numerically investigated
+in depth in Ref. [ 29]. A more complete understanding of
+these eﬀects is work in progress and can lead to poten-
+tial improvements in performance of these conversion
+processes in future.
+In short, the combination of virtual excitation of the
+transmon and dissipation and/or dephasing can lead to real
+excitations. It is not known to be possible in general to
+give an analytic expression for this eﬀect, but examining
+Eq.(B15) , we can see that if there is even a linear depen-
+dence of /Gamma1upong, then there is some optimum gwhich
+minimizes the inﬁdelity, and for larger conversion rates
+the second term will dominate. In practice, the excitation
+rate can be superlinear in the pump strength, leading to
+a narrow optimum. We ﬁnd this optimum empirically by
+measuring the exitation rate /Gamma1up, which we ﬁnd to be 1 to
+2μs−1for each transmon. We choose the parameters such
+that the dominant error source is loss, which is detectable,rather than excitation events, which are not.6. Alternate entangling schemes
+There are other many ways the conversion process used
+here can generate entanglement. For instance, modulating
+the conversion couplings in time can eﬀect an entangling
+partial swap. One such approach is to prepare a single pho-
+ton in cavity 1, turn on conversion to the bus for only
+cavity 1 for time t
+half=π/(4g)to “half swap” a single
+photon into the bus. This creates a Bell pair between cav-
+ity 1 and the bus. We may then turn on conversion from
+the bus to cavity 2 for tfull=π/(2g), which fully swaps
+the bus occupation into cavity 2, resulting in a Bell state
+between the two cavities. A continuous version of this pro-
+tocol involves simultaneous on resonance conversion with
+unequal strength, such that g1=/parenleftBig√
+2−1/parenrightBig
+g2. Dynam-
+ics are qualitatively similar to the beamsplitter operation
+we use in this work, with the bus mode being occupied
+at intermediate times and returning to vacuum after time
+approximately π/gresulting in the 50:50 beamsplitter rela-
+tions. However, such protocols implement Hamiltonians
+that are not symmetric under the exchange of modes a1
+and a2. As a consequence, should a photon loss event
+occur in the bus mode, the environment will gain infor-
+mation that projects the cavities into states that are not
+symmetric in a1and a2, making it diﬃcult to implement
+robust multiphoton entanglement schemes. For protocols
+such as the error-detected Hong–Ou–Mandel entanglement
+scheme, we must make sure to engineer a “true beam-
+splitter” transformation. For this scheme, if photon loss
+occurs in the bus mode, the environment does not learn
+from which cavity this excitation originated, owing to the
+indistinguishability implied by the symmetry of the inter-
+action. In fact, even after a single-photon loss event in the
+bus, the joint cavity state is ideally the single-photon Bell
+state|01/angbracketright+| 10/angbracketright. It is only after the parity measurements
+that the state is projected into either |01/angbracketrightor|10/angbracketright. Entangle-
+ment schemes that are insensitive to photon loss on the bus
+or otherwise rely on it will be the subject of future work.
+Another approach robust state transfer and entanglement
+generation is stimulated Raman by adiabatic passage [ 30],
+which modulates the coupling strengths in time in a way
+which suppresses the occupation of the bus at all times.
+However, because this modulation must be adiabatic with
+respect to the maximum coupling strength, such protocols
+are necessarily much slower than those used here, similar
+to the virtual Raman approach. Loss induced by nonadia-
+baticity will not have the indistinguishability properties of
+the beamsplitter.
+In addition, encoding-independent entangling gates
+between bosonic modes such as exponential-SWAP
+and Fredkin gates [ 26] may be constructed by sand-
+wiching local operations with ancillae between 50:50
+beamsplitter operations. The tools demonstrated in
+this work enable such operations between separable
+modules.
+030321-12
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+APPENDIX C: BUS RESONATOR
+CHARACTERIZATION
+1. Quality factor and attenuation length
+With quality factors in the tens of thousands, the hypo-
+thetical maximum state transfer eﬃciency from just using a
+section of superconducting coaxial cable is extremely high.To illustrate this point, we consider the 6.6 cm section of
+cable we use for this work, which has modes with Q≈
+50 000. Regarding the cable as a Fabry-Pérot cavity with
+uniform loss, this quality factor corresponds to an energy
+attenuation length of 300 m [ 6]. Over reasonable meter-
+scale lengths of cable within a cryostat, this corresponds
+to a single-pass loss approaching 10
+−3. This fundamental
+limit is orders of magnitude smaller than the single pass
+loss observed in circulator-based communication links,
+which are limited to around 0.1 [ 13,16,17].
+In the current implementation, the achievable eﬃciency
+is limited by the speed of the protocol [see Eq. (B10) ], as a
+transmitted photon essentially makes many passes through
+the bus. However, by increasing the conversion strength
+would move closer towards this fundamental limit. Fur-
+thermore, as the bus is a 3D cavity, it is reasonable to
+believe that the quality factor can be improved by several
+orders of magnitude with improved materials and better
+seam quality.
+2. Quality factor measurements
+a. Measuring the bus ex situ
+We have used a scheme similar to Ref. [ 6] to charac-
+terize the quality of the bus mode before integrating it
+with the modules. We couple to the modes of a section
+of cable in reﬂection and measure S21with a vector net-
+work analyzer. The cable is terminated at one end in a
+tunnel of 6061 aluminum alloy that functions as a waveg-
+uide below cutoﬀ. At the other end, we capacitively coupleto the cable via a coupling pin in a similar tunnel. We set
+the distance between the coupling pin and center conduc-
+tor of the cable such that we are nearly critically coupled.
+The cable is secured to these blocks of aluminum in the
+same way it is attached to the modules, with an indium-
+tipped brass set screw. Typical quality factors are of order
+50 000 although quality factors as high as 160 000 have
+been observed. Quality factors can diﬀer by factors of two
+to three in the same cable when we reseat the mounting
+screws between cooldowns. As such, we suspect seam loss
+between the outer conductor of the cable and the aluminum
+package of the modules to be a limiting factor. Eﬀorts are
+ongoing to improve the quality and reproducibility of the
+seam between the cable and modules. This screening pro-
+cess also allows us to measure the frequency and quality of
+potential bus resonators before assembling the full exper-
+imental hardware. We are also able to measure multiple
+modes of the same cable in this way. Figure 8shows such
+measurement of four modes of the same cable used in the
+main text.
+b. Measuring the bus in situ
+When the bus is installed in the modules, we can mea-
+sure its properties without any dedicated drive or measure-
+ment lines. Since the mode of interest has a dispersive
+shift to the conversion transmon, we can detect population
+in the bus by performing spectroscopy on the converter,
+much the way we measured storage mode population with
+the ancilla. The results of this spectroscopy with the cable
+driven to a coherent state is shown in Fig. 9(a).
+Given the number-resolved spectrum in Fig. 9(a), the
+damping rate of the cable κb/lessmuchχbc. We can measure this
+rate directly by displacing the cable and driving the con-
+verter with a selective pulse at ω=ωc. The height of this
+spectroscopic peak corresponds to the occupation of the
+|0/angbracketrightstate of the bus. This ring-down measurement, shown
+−40−30Magnitude (dB)
+−0.5 0.0 0.5−2.50.02.5Phase (rad)
+Frequency (kHz) − 5640
+2 cm(a) (b)
+(c)
+102κ/2π (kHz)
+4000 6000 8000
+Mode frequency (MHz)50100150Quality factor
+ (thousands)Internal
+CouplingMode number
+23 4 5
+FIG. 8. Bus characterization
+ex situ . (a) Setup for measuring
+cable resonators in reﬂection. Cable
+is embedded in aluminum tunnel,
+held in place with brass set screw.
+Copper cable (left) enters the otherend of tunnel, and is soldered into a
+ﬂange. Both have outer conductor and
+dielectric removed in the tunnel (notshown). (b) Reﬂection measurement
+ofn=3 mode, with ﬁt. (c) Extracted
+internal decay rate κand internal
+and coupling quality factors for four
+modes of the same cable.
+030321-13
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+0 5 10
+Time ( µs)Data
+Fit:  
+−15 −10 −5 0
+(MHz)0.40.60.8Spec signal (arb. units)Data
+Fit: (a) (b)
+FIG. 9. Bus characterization in situ . (a) Spectroscopy on con-
+version transmon for a coherent state |α=1/angbracketrightin the bus.
+(b) Lifetime measurement of bus. Bus is displaced to |α=2.5/angbracketright,
+then after a variable delay, the conversion transmon is drivenwith a selective πpulse at ω=ω
+c.
+in Fig. 9(b), reveals a bus lifetime of 1.6 μs, orκb/2π=
+100 kHz.
+We certify that the lifetime of the bus is not degraded
+in the presence of the conversion pumps. This is done bypreparing a single excitation in one of the storage modes
+and turning on conversion on only one module, such that
+excitations swap into the bus and back into the storage
+cavity. By measuring the storage population after applying
+conversion for variable time twe can extract both gandκ
+from the ﬁt in Fig. 10. The ﬁtted value κ
+b/2π=110 kHz
+shows minimal change in the presence of the conversion
+process. Likewise, ﬁtting the data in Fig. 2(b) of the main
+text results in a similar value of κb. We also verify that the
+cable has no measurable thermal population by examin-
+ing the storage population after a single swap between the
+storage and bus when we initialize vacuum.
+3. Dependence of scheme on cable length
+The section of cable we use is fairly short, suitable
+for joining adjacent modules together. Regarding theextension of this scheme, imagine a large future modular
+system within a single dilution refrigerator. A 1 m long
+bus could connect from one side to the other of such a
+system, and has approximately 100 antinodes, allowing
+for connections to several intermediate stations. For all
+other hardware kept ﬁxed, there are some challenges which
+arise when making the link much longer. Increasing the
+length of the bus linearly increases the mode volume, and
+hence reduces the single photon coupling strength by the
+square root of the length, or a factor of ﬁve compared with
+our current 5 cm bus length. Hence the swap rate would
+remain approximately 100 kHz or 3 μs, which would still
+be acceptable given some modest improvements in e.g., the
+quality factor of the bus.
+This reduction in gmay be compensated for by increas-
+ing the capacitive coupling between the conversion trans-
+mon and the cable. In doing so, we may Purcell limit the
+transmon and storage cavity as well as increase crosstalk
+between modules. We have reason to believe we may
+already be Purcell limiting the conversion transmons: their
+lifetimes as measured before the addition of the bus were
+a factor of a few longer. The Purcell eﬀect arises due to
+oﬀ-resonance static couplings to modes of the cable even
+in the absence of conversion drives. As we make the cable
+longer, the free spectral range decreases as 1 /l. Within a
+ﬁxed frequency window, there are now more cable modes
+the conversion transmon or storage mode can couple to oﬀ-
+resonantly. This potential issue could be addressed with
+ﬁltering dedicated ﬁlter modes between the conversion
+transmon and the bus. This is similar to the approached
+used in Ref. [ 18], but in this case the ﬁlter modes need not
+be precisely frequency-matched. Improving the quality of
+the bus modes would also lessen the eﬀect of the Purcell
+limit.
+Finally, it is worth emphasizing that even for a longer
+cable, we can still eﬀectively model the dynamics by con-
+sidering coupling to a single bus mode and the protocols
+0 1 2
+Time ( µs)−202Pump detuning (MHz)
+ 0.00.51.0
+P(n = 1)
+0 2 4 6 8
+Time ( µs)0.000.250.500.751.00
+Data
+Fit(a) (b)
+FIG. 10. Cavity-bus swapping dynamics. (a) A single photon is prepared in cavity 1, then conversion to the bus is enable by turning
+on both pumps. Measured occupation of |1/angbracketrightin cavity 1 shown versus time and detuning of one pump from resonance. (b) Line cut at
+zero detuning shows ring-down of population from decay in the bus. Value of conversion strength and decay rate in text is extracted
+from ﬁt.
+030321-14
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+would be unchanged. Only when g/greaterorsimilarFSR will we need
+to consider simultaneous coupling to multiple bus modes,
+as was explored in Ref. [ 19]. For a 1 m cable, the FSR is
+approximately 100 MHz, much larger than the conversion
+strengths we can engineer at present.
+APPENDIX D: EXPERIMENTAL AND
+ANALYTICAL TECHNIQUES
+1. Measurement
+Diagrams of pulse sequences can be found in Fig. 11.
+a. Ancilla measurement
+For all measurements which are not at the end of the
+experimental sequence, we use a 460 ns long square
+readout pulse calibrated to discriminate ancilla states |g/angbracketright
+and|e/angbracketright. The acquisition window is 580 ns long. Thismeasurement is used for system reset as well as parity
+assignment. Ancillae have assignment ﬁdelities of 0.99 for
+|g/angbracketrightand 0.98 for |e/angbracketright, with the asymmetry due to relaxation
+events during the measurement.
+b. Tomographic readout
+Measurements used for tomography (the ﬁnal measure-
+ments in an experimental run) are preceded by a pulse on
+the ancilla which inverts the population in |e/angbracketrightand|f/angbracketright.
+The readout pulse and acquisition (500 and 640 ns, respec-
+tively) are longer, and calibrated to distinguish states |g/angbracketright
+and|f/angbracketright. This allows for a measurement which is much
+less sensitive to decay events of the ancilla [ 46,47], pro-
+viding higher and more symmetric assignment ﬁdelity,
+higher than 0.995 for all states. This improves the mea-
+surement contrast and reduces errors in the single-shot
+Module 1
+Pumps
+Module 2P
+P X, Y, ZWModule 1
+Pumps
+Module 2nnModule 1Pumps
+Module 2P WAncilla
+CavityAncilla n
+P=Ancilla
+Cavity==
+W(a)
+(b) (c)
+(d)EncodeX, Y, ZAncilla
+Cavity=
+=Ancilla
+CavityNumber measurement
+Parity measurementWigner measurement
+Basis measurement
+Optimized control pulseDecode
+t tt
+FIG. 11. Protocols and pulse sequences. (a) Measurement and control subroutines. Pulse durations quoted in Appendix Dare full
+duration of pulses shown here. (b) Variable beamsplitter tuneup, used in Fig. 2of the main text. Frequency and duration of constant
+pump pulse are swept, with values reported in axes labels of Fig. 2. Pulse ring-up and ring-down length is 48 ns each for every
+experiment reported on, with a cosine amplitude proﬁle. All four pump pulses have the same temporal proﬁle. All durations reportedhere and elsewhere are of the constant section. (c) Pulse sequence for qubit transfer, used in Fig. 3of the main text. Dashed components
+only used in the error-tracked protocol. (d) Pulse sequence for entanglement generation used in Fig. 4of the main text. Dashed
+components only used in the error-detected protocol.
+030321-15
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+projective measurement in the entangled state tomography
+(Appendix D4).
+c. Cavity and ancilla manipulation
+Unless otherwise noted, all ancilla rotations are eﬀected
+with 40 ns Gaussian pulse ( σ=10 ns). Cavity displace-
+ments are 40 ns Gaussian pulses ( σ=10 ns). All other
+manipulation of the cavity state are carried out with numer-
+ically optimized control pulses (NOCPs) on the cavity and
+ancilla using the GRAPE algorithm [ 48]. Pulse lengths are
+500–1200 ns depending on the operation.
+d. Parity measurement
+Cavity photon number parity measurement is eﬀected
+with a Ramsey-type sequence on the qubit [ 49]. Two 90◦
+ancilla rotations with an interpulse delay of π/χ at=416
+(492) ns for module 1 (2) entangles ancilla state with pho-
+ton number. Ancilla rotations for parity measurement are
+24 ns Gaussian pulses ( σ=4 ns) to make pulses maxi-
+mally unselective on photon number. Parity measurements
+used for error detection have the phase of the second rota-
+tion reversed to map even number (the most probable
+outcome) onto the ground state of the ancilla, to minimize
+the probability of errors during ancilla measurement.
+e. Cavity population measurement and normalization
+Measurement of the occupation of the nth Fock state in
+the cavity is made by applying a spectrally narrow rotation
+on the ancilla, at frequency ωq+nχ, exciting the ancilla
+only for this number state. Selective pulse lengths are
+1200 ns ( σ=400 ns) for module 1 and 1920 ns ( σ=480
+ns) for module 2. To normalize for errors in the pulse and
+readout, we measure this occupation for each relevant n,a s
+well as a reference measurement of the ancilla state with no
+rotation, then subtract the reference and normalize so that
+the sum of all occupations is 1. This normalization proce-
+dure is applied to the data in Figs. 2(b) and2(c)in the main
+text.
+f. Conversion transmon measurement
+The conversion transmons do not have their own readout
+resonators, and are measured indirectly through the cavi-
+ties. This is used only for system reset and characterization
+measurements. The cavity can be used to measure the con-
+verter as in Ref. [ 43]. After the cavity is determined to be
+in its vacuum state (see Appendix D2), it is displaced to
+a coherent state with amplitude α, typically ∼1.5. After
+a delay of approximately 200 ns, the opposite displace-
+ment is applied. If the converter is in its ground state, thecoherent state will not have moved during the delay, and
+will return to vacuum. If the converter was excited dur-
+ing this time, the cavity state will rotate by an angle χ
+act,
+typically around 70◦. The reverse displacement brings thisto another coherent state with a very small overlap with
+the vacuum state. By applying a πpulse to the ancilla,
+selective on zero photons in the cavity, we obtain an exci-
+tation probability proportional to the converter excitation
+probability, with a ﬁdelity of about 0.95. Importantly, this
+measurement is unlikely to incorrectly give the result cor-
+responding to the converter in its ground state, so it is
+useful for verifying with high conﬁdence that the converter
+is not excited.
+2. System reset and state preparation
+a. System reset by feedback
+To ensure the modules begins in a known state, we use
+an active feedback cooling sequence that makes use of
+the ability of our control hardware to perform simultane-
+ous and independent control branching when resetting the
+ancilla transmons.
+The set of nested subroutines used at the beginning of
+every experimental sequence is shown in Fig. 12.T h e
+sequence begins by ensuring both ancillae are in their
+ground states, actively resetting as necessary. Then a π
+pulse, selective on n=0 photons in the cavity, is applied
+to each ancilla, followed by measurement. Measurement of
+the ancilla in |e/angbracketrightheralds an empty cavity. If both cavities
+are empty, we continue (see the next paragraph). If not, we
+reset the ancillae to |g/angbracketright, then actively empty the cavities
+by performing swaps with the bus (as in Fig. 10), one at a
+time, with a 10 μs delay after the swap to allow the state
+to decay in the bus. This is at least two orders of magni-
+tude faster than waiting for the long-lived cavities to decay
+on their own. We then start the sequence over, beginning
+with ancilla reset, and repeating as necessary to ensure both
+cavities are in the vacuum state.
+Once the cavities are conﬁrmed empty, we use them
+to measure the state of the conversion transmons. This
+uses the Ramsey-style selective displacement described in
+Appendix D1 f, which displaces the cavity if the transmon
+is not in its ground state. We then repeat the cavity mea-
+surement. If the cavities are again found in vacuum, we
+know the converters were in |g/angbracketright. We then reset the ancil-
+lae one last time, and begin the experimental sequence.
+If either cavity is not in the vacuum state, this means its
+converter was not in |g/angbracketright. We then empty both cavities and
+begin the entire sequence from the beginning. As the time
+to empty the cavities is relatively long, we do not actively
+reset the converters, but simply allow them to decay during
+this time.
+After successful completion of this cooling routine, we
+ﬁnd the ancilla transmons and cavities with less than 1%
+probability each of being out of their respective groundstates. The conversion transmons are diﬃcult to mea-
+sure to this degree of accuracy, since their measurement
+sequence is fairly long and involved. Given the length
+of this sequence, it is likely that they have rethermalized
+030321-16
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+=
+X0X0
+X X
+Reset qubitsXm1 = 0 m2 = 0m1 & m2 = 1
+=
+Return
+Yes Yes NoYes NoYes
+Yes Yes
+YesYes
+Yes
+YesNo
+NoNo
+NoNo
+No
+No
+No
+X Xm1 & m2 = 0
+m1 = 0 m2 = 0Split control flow
+Recombine control flowKey:Reset system =
+Measure ancillae
+ProceedX0X0
+X X
+X XX m1 = 0 m2 = 0m1 & m2 = 1
+=
+D(α)Displace cavity by α D(α)
+Wait
+D(−α)D(α)
+Wait
+D(−α)
+X
+X0Rotate ancilla
+Rotate ancilla, selective on n = 0Reset systemm1 & m2 = 0
+Reset ancillaeMap converters
+Map converters
+Measure ancillaeReset cavities
+ReturnMeasure ancillaeReset cavitiesReset ancillae
+Reset ancillae
+Empty cavities
+Empty cavities
+Reset ancillae
+FIG. 12. System reset. Logical control ﬂow for system reset and veriﬁcation. Each experimental sequence begins with a call to
+“Reset System,” which follow the control ﬂow until the conditions have been met to reach “Proceed.” Individual subroutines loop
+until reaching “Return,” at which point they return to the previous sequence.
+030321-17
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+to about the 1% level (each) by the time the cooling is
+completed successfully.
+b. State preparation
+As discussed previously, all nontrivial cavity states are
+prepared with NOCPs. For all operations used to prepare
+cavity states, the ancilla is meant to return to its ground
+state at the end of the pulse. Errors during the operationcan result in occupation of the excited state, usually with
+probability 2–3% depending on the pulse. To detect these
+errors, we measure the state of the ancilla after applica-
+tion of the pulse for all experiments. If not measured to
+be in its ground state, we consider this a failure of the
+preparation, and reset the entire system before trying again.
+This measurement is responsible for the small, determinis-
+tic phase shift seen in the Wigner tomograms of the states
+as prepared, shown in Figs. 3(b) and3(c)of the main text.
+Although this makes the entire experiment probabilistic,
+we regard this as a part of the system initialization pro-
+cess, which is already nondeterministic. Operations not at
+the beginning of the experimental sequence are not error-
+detected in this way. With improved ancilla coherence and
+calibration, this step is not necessary [ 48].
+c. Logical state encoding
+For each of the two logical encodings used in Fig. 3
+of the main text, the state is encoded in the cavity using
+NOCPs. First the state is prepared in the ancilla trans-
+mon with a phase- and amplitude-controlled rotation. Then
+the pulse, which maps combined ancilla-cavity state |g/angbracketright|0/angbracketright
+(|e/angbracketright|0/angbracketright) onto |g/angbracketright|0/angbracketright
+L(|g/angbracketright|1/angbracketrightL). As stated in Appendix
+D2 b , we then conﬁrm the ancilla has successfully returned
+to its ground state before proceeding. The mean ﬁdelity of
+the encoded states are 0.99 for the Fock encoding and 0.98
+for the cat encoding, obtained from Wigner tomography.
+3. Wigner tomography and reconstruction
+a. Measurement, symmetrization, normalization, and
+reconstruction
+The Wigner function measurement is carried out as in
+Ref. [ 49], for instance. The cavity is displaced by a variable
+amount β, and the average parity is measured using the
+parity measurement described in Appendix D1 d .T os y m -
+metrize the measurement, we perform two distinct parity
+mapping sequences: one which maps even photon numbers
+to|g/angbracketrightof the ancilla; and one which maps even to |e/angbracketright.W e
+take the diﬀerence of the two resulting datasets. This sym-
+metrizes the Wigner function against biased readout errors
+and ﬁnite number-selectivity of the ancilla rotations.
+The Wigner function of any physical cavity state should
+integrate to 1, even for a mixed state. As our reconstruction
+routine assumes the data to be physical, we normalize the
+measured Wigner functions by a trapezoidal 2D integralover the entire dataset. This corrects for loss of contrast due
+to the parity mapping sequence and the ancilla measure-
+ment, an eﬀect of 2–3%. This results in the data presented
+in the main text.
+The cavity state ρis reconstructed from the Wigner
+function using MLE, the same routine used in [ 13]. The
+routine is a convex optimization over the space of phys-
+ical cavity density matrices with dimension d=8 for all
+data. As the largest states measured have mean photon
+number ¯n≤2, this Hilbert space is suﬃciently large to
+capture all population. The physicality constraints are that
+ρis positive semideﬁnite and Tr (ρ)=1.
+b. Fidelity error bars
+The state ﬁdelities quoted in the main text are computed
+as the ﬁdelity of the reconstructed state to the ideal state
+ρideal,F=Tr/parenleftbig/radicalbig√ρidealρ√ρideal/parenrightbig2. The net contribution of
+errors in reconstruction due to noise and systematic errors
+such as the dependence of the parity measurement con-
+trast on mean photon number contribute about 1% error on
+average, as estimated from simulating these imperfections
+on ideal data. This gives the error bar quoted for most of
+the mean state ﬁdelities in the text. The systematic error
+for¯Fodd, which is reconstructed from Wigner functions
+taken after a measurement of odd parity, is larger due to
+the occurrence of ancilla decay errors during the ﬁrst par-
+ity measurement, because odd parity is associated with a
+measurement of the ancilla in |e/angbracketright. These errors result in
+distortion of the measured Wigner function from dephas-
+ing caused by the dispersive shift to the ancilla. However,
+owing to the low probability of this case, the overall error
+in¯Fcat,tracked is not as large.
+The errors in the entangled state reconstruction,
+described in Appendix D4, are similar, because this
+method relies mostly on density matrices reconstructed
+from Wigner functions.
+4. Entangled state tomography
+To clearly illustrate the correlations between the two
+cavities, we perform Wigner tomography on cavity 1,
+postselected on a logical measurement in cavity 2 in the
+x,y,a n d zbases, as indicated in Figs. 4(a) and4(d) of the
+main text. As the Wigner function is a complete description
+of the state, these conditional Wigner tomograms provides
+enough information to reconstruct the full two-qubit state.
+a. Logical basis measurement
+The logical basis measurements for entanglement char-
+acterization are eﬀected by decoding the cavity state ontothe ancilla using NOCPs. These are the opposite of the
+encoding operations in Appendix D2 c. The mapping is
+|g/angbracketright|0/angbracketright
+L(|g/angbracketright|1/angbracketrightL)t o|g/angbracketright|0/angbracketright(|e/angbracketright|0/angbracketright). We then measure the
+ancilla to eﬀect a zbasis measurement, or rotate the ancilla
+030321-18
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+into the appropriate basis with a π/2 pulse around the Y
+(X) axis to measure in the x(y) basis.
+To assess the ﬁdelity of the decoding operations, we
+prepare six cardinal states in the ancilla ( |±z/angbracketright,|±x/angbracketright,a n d
+|±y/angbracketright), encode and immediately decode, then apply the
+rotation which should restore the ancilla to the ground
+state, and measure. We ﬁnd on average a 3–4% error,
+depending on the encoding. We assume the inﬁdelity
+of encoding and decoding is similar, and attribute half
+the average incorrect measurement result to the “decode,
+rotate, and measure” operation, which is the same oper-
+ation that makes up the logical basis measurement. This
+yields the approximate 2% tomographic error quoted in the
+main text.
+b. Two-qubit state reconstruction
+Conditional Wigner tomograms for the zand xbases are
+shown in Figs. 4(b) and4(e)of the main text; the complete
+dataset is shown in Fig. 17. We reconstruct each Wigner
+function individually to produce the density matrix of cav-
+ity 1, conditioned on the measurement outcome in cavity 2.
+As before, the measured Wigner function is normalized
+before reconstruction, to correct for measurement contrast
+in the parity mapping and ancilla readout. The result is two
+conditional density matrices for each of the three bases.
+This way we can reconstruct the two-qubit state without
+having to apply a decode pulse on cavity 1 as well.
+We use these conditional density matrices to reconstruct
+the logical two-qubit density matrix. This reconstruction
+uses a routine used in Ref. [ 34], adapted for our tomog-
+raphy scheme. The use of the |f/angbracketrightlevel of the ancilla
+for enhanced and roughly symmetric measurement con-
+trast obviates the need for additional measurements to
+symmetrize the resultant data (see Appendix D1 b ).
+Each joint choice of bases for the two cavities is given
+by{k,l}∈{ x,y,z}⊗2, where kcorresponds to the basis
+choice for cavity 1 and lfor cavity 2. We refer to the mea-
+sured probabilities of the logical measurements in cavity 2
+asp±l, and the conditional density matrices of cavity 1 as
+ρ±l. The goal is to produce the expectation values p±k,±lof
+the four projectors /Pi1±k,±l=| ± k/angbracketright1|±l/angbracketright2/angbracketleft±k|1/angbracketleft±l|2, which
+correspond to the probability of measuring the joint state
+to be in |±k/angbracketright1|±l/angbracketright2. This joint probability is p±k,±l=
+p±lP(±k|±l), where P(±k|±l)is the conditional proba-
+bility of measuring ±kin cavity 1 given the result ±lin
+cavity 2. This conditional probability is the expectation
+value of the single-cavity projector /Pi1±k=| ± k/angbracketright1/angbracketleft±k|1,
+given the result ±lin cavity 2.
+To compute these conditional probabilities, we take the
+conditional density matrix ρ±land evaluate P(±k|±l)=
+/angbracketleft/Pi1±k/angbracketright±l≡Tr(ρ±l/Pi1±k), which is the squared overlap of
+the measured cavity state with the logical state |±k/angbracketright1given
+outcome ±l. This is essentially the probability we would
+measure cavity 1 to be in |±k/angbracketright1with an ideal projectivemeasurement. It is important to note here that, because the
+cavity density matrix is of dimension larger than two, leak-
+age out of the logical subspace (here, {|0/angbracketright,|1/angbracketright}) results in
+P(+k|±l)+P(−k|±l)<1. We show that this results in
+a reconstructed logical two-qubit state with trace slightly
+less than 1. As we assign a binary outcome to the logical
+measurement of cavity 2, p+l+p−l=1 by construction.
+This means that leakage out of the logical space on cav-
+ity 2 is not directly observed. However, such leakage will
+contribute to inﬁdelity. As the decode operation cannot
+account for this leakage, the result is some arbitrary out-
+come of the ancilla measurement, which is we assume to
+be uncorrelated with the result in cavity 1. Thus, while
+the decode-and-measure sequence will mask this leakage,
+it should convert it to inﬁdelity in the form of a statisti-
+cal mixture. Put another way, this local operation cannot
+increase the amount of entanglement, so it does not result
+in overestimation of the ﬁdelity.
+The 3 ×3×4=36 computed joint probabilities p±k,±l
+are fed into the MLE reconstruction routine, which is a
+convex optimization over the space of all physical two-
+qubit (22dimensional) density matrices. To ensure physi-
+cality, the resultant density matrix ρLis constrained to be
+Hermitian and positive semideﬁnite. In addition, Tr (ρL)≤
+1 to account for the possibility of leakage out of the logical
+space as discussed previously. This leakage is very small
+for the {|0/angbracketright,|1/angbracketright}encoding: the trace of ρL(the value of the
+II bar) is found to be 0.999, consistent with very small
+(<10−3) occupation of Fock states above n=1 for the
+reconstructed cavity density matrices.
+For the two-photon entangled state, there is a small but
+measurable amount of leakage outside of the {|0/angbracketright,|2/angbracketright}code
+space due to errors in the parity measurement and cavity
+decay during tomography. The value of the II bar (and,
+hence, the trace of ρL) is 0.991, consistent with a typical
+1% occupation of the |1/angbracketrightstate in the measured Wigner
+1.0 1.2 1.4 1.6
+Coherent state amplitude10–210–1Infidelity
+ 0.95 0.90 0.85 0.80 0.75
+FIG. 13. Optimum cat code size. For eﬃciencies ranging from
+0.75 to 0.95 (text annotations at right), the ideal corrected inﬁ-
+delity versus cat size α. Optimum ﬁdelity denoted by black
+triangles.
+030321-19
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+Reset 
+systemInitialize
+50:50MeasureAttempt
+Reset TomographyMeasureMeasure
+Measure
+NoYes
+gg?
+NoYes
+gg?
+No
+Yeseg?
+X
+XX
+XNo
+Yesge?DecodeMeasure
+Measure
+PrepareLegend:
+XFlip ancillaVariable displacement
+Variable rotationParity map
+NoYes
+gg? BranchMeasureMeasure 
+ancilla
+DecodeDecode onto
+ancillaFIG. 14. Repeated Hong–
+Ou–Mandel entanglement
+control ﬂow. Top and bot-tom rows represented oper-
+ations for modules 1 and 2,
+respectively. Boxes labeledwith, e.g., “gg?” represent
+a binary conditional branch
+on ancilla measurements;“yes” and “no” arrows are
+ﬂow branch for measure-
+ment outcome. Box widthsloosely represent operation
+times, but are not to scale.
+functions of cavity 1. In fact, the occupation of the error
+state|1/angbracketrightis found to be largest for states with large occu-
+pation of |2/angbracketright, suggesting cavity decay errors are primarily
+responsible.
+APPENDIX E: CAT CODE CONSTRUCTION
+1. Deﬁnition
+Our error-correctable encoding is the four-component
+cat code [ 32]. The codewords have deﬁnite photon number
+modulo 4:
+|0/angbracketrightL∝(|α/angbracketright−| iα/angbracketright+| − α/angbracketright−| − iα/angbracketright)∝/summationdisplay
+n=2,6,10, ...αn
+√n!|n/angbracketright,
+|1/angbracketrightL∝(|α/angbracketright+| iα/angbracketright+| − α/angbracketright+| − iα/angbracketright)∝/summationdisplay
+n=0,4,8,...αn
+√n!|n/angbracketright,
+(E1)
+where we omit the state-dependent normalization factors.
+These states are orthogonal for all values of α.
+A single-photon loss event on the logical space spanned
+by these codewords takes a superposition of codewords
+into the error space which is also spanned by the odd-parityfour-component cats:
+|0/angbracketrightE∝(|α/angbracketright− i|iα/angbracketright−| − α/angbracketright+ i|−iα/angbracketright)∝/summationdisplay
+n=1,5,9,...αn
+√n!|n/angbracketright,
+|1/angbracketrightE∝(|α/angbracketright+ i|iα/angbracketright−| − α/angbracketright− i|−iα/angbracketright)∝/summationdisplay
+n=3,7,11, ...αn
+√n!|n/angbracketright.
+(E2)
+TABLE I. State transfer error contributions. Error quoted due
+to bus loss for cat code is the remaining inﬁdelity from second-order errors, assuming perfect error-tracking. “State preparation”
+error is ﬁdelity of preparing a single photon for the ineﬃciency,
+and mean state ﬁdelity of encoding for the inﬁdelities. Inﬁdelitydue to parity measurement is roughly equal contributions of error
+in parity mapping and ancilla measurement, both of which can be
+suppressed by repeated fault-tolerant parity measurement [ 33].
+Source IneﬃciencyInﬁdelity
+(Fock)Inﬁdelity
+(Cat)
+Bus loss 0.11 0.04 0.01
+Transmon excitation 0.04 0.02 0.03State preparation 0.01 0.01 0.02
+Parity measurement n/a n/a 0.02
+Total 0.16 0.07 0.07Measured 0.16(1) 0.08(1) 0.08(2)
+030321-20
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+−202
+−2 0 2−202
+−2 0 2−2 0 2−2 0 2−2 0 2−2 0 2
+ReIm–2/π02/πW
+FIG. 15. Full Fock code data. Measured Wigner functions for all six cardinal states of Fock encoding, as prepared in module 1 (top)
+and received in module 2 (bottom).
+An odd parity outcome after the state transfer tells us we
+just need to relabel the codewords to that of the error
+space and we will have mostly preserved the quantum
+information.
+2. Optimum cat size
+The value of αfor the cat code is something we can
+chose when we encode in the initial states with NOCPs.
+We can see that in the limit α→0, the codewords become|0/angbracketrightL=|2/angbracketright,|1/angbracketrightL=|0/angbracketright. This is not a good encoding for error
+detection because only the |0/angbracketrightLcodeword can lose a pho-
+ton. Upon measuring odd parity, the state is projected into
+|1/angbracketright, destroying any initial superposition. We can detect
+errors, but cannot recover the information. For small but
+ﬁnite values of α, upon knowing that a photon was lost,
+the state will be polarized more towards the codeword that
+started with the larger number of photons resulting in a
+loss of ﬁdelity. Similarly, upon knowing that no photon
+was lost, the state is polarized more to the codeword with
+−202
+−202
+−202
+−2 0 2−202
+−2 0 2−2 0 2−2 0 2−2 0 2−2 0 2
+ReIm–2/π02/πW
+FIG. 16. Full cat code data. Measured Wigner functions for all six cardinal states of cat encoding, as prepared in module 1 (ﬁrst
+row), received in module 2 with no parity measurement (second row), and received and conditioned on even (third row) and odd
+(fourth row) parity.
+030321-21
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+−202
+−202
+−2 0 2−202
+−2 0 2(a)
+ReIm−202
+−202
+−2 0 2−202
+−2 0 2W
+ReIm(b)
+–2/π02/πFIG. 17. Full entanglement data. (a) Single-
+photon entanglement tomography data for z,x,
+and ybases, top to bottom. (b) Two-photon
+entanglement tomography data for z,x,a n d y
+bases, top to bottom.
+fewer photons. This no-jump backaction results in a logical
+dephasing error.
+This no-jump error is suppressed exponentially for large
+α, since |0/angbracketrightLand|1/angbracketrightLwill contain the same number of
+photons on average ( ¯n=|α|2). However, at larger α, the
+dominant error is two-photon loss errors. As loss of two
+photons does not change the parity, this error is unde-
+tectable, and results in a logical bit-ﬂip. As such, there
+is an optimum value of αto use for a given energy
+transfer eﬃciency ηas illustrated in Fig. 13. This trade-
+oﬀ has been explored theoretically in more detail in
+Ref. [ 50].
+In this experiment, η=0.84 yields an optimal starting
+α=1.3. With only photon loss error, this puts a theo-
+retical upper bound of 0.97(1) for the transfer ﬁdelity.The measured value of 0.92 is lower due to additional
+experimental errors, mainly excitations of the conversion
+transmons and inﬁdelity in the parity measurement and
+state preparation.
+3. Comparison with binomial encoding
+The optimal cat code basis is qualitatively very sim-
+ilar to the lowest-order binomial encoding [ 12] with
+codewords |0/angbracketrightL=(|0/angbracketright+| 4/angbracketright)/√
+2,|1/angbracketrightL=|2/angbracketright. For the
+experimental transfer eﬃciency η=0.84, the cat code is
+predicted to give slightly better transfer ﬁdelity by a few
+percent due to lower overhead. This is owing to the fact
+¯n≈1.7 for the optimal cat code versus ¯n=2 for the
+binomial code.
+0.00.10.2Failure probability
+100101102
+Max rounds0.880.900.92Bell state fidelity
+0.0 0.1 0.20.880.890.900.910.92
+Bell state fidelity(a) (b)
+Failure probabilityFIG. 18. Repeated Hong
+–Ou–Mandel entanglement.
+(a) Cumulative failure proba-
+bility and ﬁdelity of repeatedHong–Ou–Mandel interfer-
+ence and parity measurement,
+as a function of the number ofrounds accepted. (b) Fidelity
+versus failure probability.
+030321-22
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+(a)
+(b)Fock encoding
+Cat encoding
+FIG. 19. Decoded state transfer qubit tomography. State transfer between ancilla 1 and ancilla 2 achieved with an additional
+decoding NOCP pulse on module 2. Qubit tomograms of ancilla 2 for the six cardinal states are shown for the two encodings.
+(a) Using the Fock encoding for intermodule state transfer (b) Using the cat encoding for intermodule state transfer, with parity-
+conditional decoding. Tomograms sorted by even parity outcomes (top row) and odd parity outcomes (middle), and full deterministicdata (bottom).
+4. Posttransfer basis
+After the transfer protocol, the information is encoded in
+a new logical basis. After reconstructing the density matrix
+of the six cardinal transferred states, we ﬁnd the basis that
+maximizes the average transfer ﬁdelity independently for
+each parity outcome. We optimize the choice of basis over
+the size of the cat, α, and a deterministic phase shift that
+is diﬀerent for the even and odd parity outcomes. For both
+parity outcomes, we ﬁnd an optimal α=1.2, close to what
+we expect from the no-jump backaction. Both these bases
+still have the same error-correctable properties as the orig-
+inal basis, namely further single-photon loss events can be
+detected by measuring parity jumps.APPENDIX F: ERROR-CORRECTED STATE
+TRANSFER
+To demonstrate the feed-forward tools needed to
+actively correct for photon loss during the state transfer,
+we extend the error-tracked state transfer with a real-
+time conditional decoding procedure. We apply a decoding
+NOCP on module 2 to transfer the state from cavity 2
+to ancilla 2, ideally leaving cavity 2 in the vacuum state,
+analogous to the decoding used for the logical measure-
+ment used for entanglement tomography in Appendix D4.
+Overall, this amounts to transferring the qubit state from
+ancilla 1 to ancilla 2 with the information encoded in
+the|g/angbracketright,|e/angbracketrightstates of ancilla 2 at the end of the protocol.
+030321-23
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+Ancilla measurement for qubit tomography is the same as
+the measurement described in Appendix D4 a.
+As the qubit is encoded in a diﬀerent basis depending
+on the measured error syndrome outcome, we preload two
+decodings: one for even parity and one for odd. The con-
+troller branches on the parity measurement outcome to
+use the correct decoding operation, similar to Ref. [ 11].
+The NOCPs for the Fock and cat encodings introduce a
+small additional inﬁdelity estimated to be around 1–2%
+due to ancilla decoherence and pulse errors. As the ancilla
+can be treated as a two-level system, leakage errors out
+of the cavity code space are converted into errors on the
+ancilla of another type, which in general depends on the
+details of the leakage and the NOCP. Although the decod-
+ing process masks the form of these errors, it cannot, in
+principle, improve the ﬁdelity beyond what was measured
+from direct Wigner tomography.
+For both Fock and cat encodings, we ﬁnd an ancilla-
+to-ancilla average state transfer ﬁdelity of 0.91, indicating
+we are also at break-even for this extended version of our
+protocol. Qubit tomography and individual transfer ﬁdeli-
+ties are shown in Fig. 19and Table III. Alternatively, one
+may error correct the cavities by performing conditional
+NOCPs that map the appropriate posttransfer basis back to
+the original encoded basis.
+The decoded state tomograms revel important essen-
+tial features of error correction with the cat code. As the
+codewords used do not have the same average photon num-
+ber, there is a noticeable polarization error towards the
+state|0/angbracketrightLin the case of a single-photon loss, evident in
+Fig. 19(b) . In other words, when we detect a single pho-
+ton error, we learn something about the logical state: we
+were more likely to have started in state |0/angbracketrightL(contains
+n=2, 6,...), the state with larger average photon num-
+ber. Similarly, there is also a smaller polarization towards
+state|1/angbracketrightL(contains n=0, 4,...) in the event of no pho-
+ton loss. These opposite polarizations cancel out in the
+weighted deterministic state, resulting in a symmetric loss
+of contrast in the Xand Ybases, which is a logical dephas-
+ing error. Also apparent in the deterministic data is a
+symmetric decrease in the Zpolarization due to bit-ﬂip
+errors from multiphoton loss events. As we operate at the
+optimum point, these logical bit and phase ﬂip errors are
+balanced, and the result is a uniformly depolarizing error.
+A diﬀerent choice of αcan bias the logical error chan-
+nel. This tradeoﬀ is explored more fully theoretically in
+Ref. [ 50].
+APPENDIX G: EFFECTIVELY DETERMINISTIC
+TWO-PHOTON ENTANGLEMENT
+For the Hong–Ou–Mandel entanglement scheme, in the
+event we measure a parity outcome other than (even,
+even), we in principle still know the current state of both
+cavities. The parity outcomes in the event of single-photonloss are (even, odd) and (odd, even) which occur with
+equal probability and project the cavities into the states
+|01/angbracketrightand|10/angbracketright. We may reload a photon in the empty cav-
+ity using the corresponding NOCP to rapidly reprepare
+the initial state |11/angbracketrightand try again to generate the desired
+Bell state within the same experimental realization. We
+can repeat this protocol indeﬁnitely until we obtain the
+desired (even, even) parity outcome, eﬀectively making
+this scheme deterministic. With this multiround modiﬁ-
+cation and keeping 100% of the data, we can reach an
+average Bell state ﬁdelity of 0.88(1), comparable with the
+single-photon Bell state generation scheme. If we impose a
+cutoﬀ to the maximum number of rounds, we can boost this
+TABLE II. Sample parameters. Uncertainties of measured
+Hamiltonian parameters are less than 0.1% except when indi-
+cated by fewer signiﬁcant digits. Subscript frefers to Purcell
+ﬁlter. Decay parameters are observed to ﬂuctuate around 10%;
+typical values are given. (a) Here χccof module 1 was not
+measured, but is expected to be similar to that of module 2.(b) Ramsey decay of ancilla 1 was not a simple exponential, indi-
+cating a frequency instability. Reported number is decay scale at
+short times.
+Parameter name Symbol Module 1 Module 2
+Hamiltonian parameter (MHz)Mode frequency ω
+a/2π 6514.3 6505.2
+ωt/2π 5838.5 5668.7
+ωc/2π 5081.6 5149.2
+ωr/2π 8970.7 9014.9
+ωf/2π 9077 9114
+ωb/2π 5643
+Pump frequency ωX/2π 5222 5228
+ωY/2π 6098 6095
+Cross-Kerr χat/2π −1.138 −0.953
+χac/2π −0.765 −1.077
+χbc/2π −4.3 −2.7
+χrt/2π −1 −1
+Self-Kerr χaa/2π−3.9×10−3−4.1×10−3
+χtt/2π −213.5 −203.4
+χcc/2πa−112
+Decay parameter ( μs)
+Energy decay time Ta
+1 300 450
+Tt
+1 35 65
+Tc
+1 10 20
+Tr
+1 0.10 0.10
+Tf
+1 0.004 0.005
+Tb
+1 1.6
+Ramsey decay Ta
+2R 100 140
+time Tt
+2R 15b30
+Tc
+2R 10 20
+Hahn echo Tt
+2E 35 80
+decay time Tc
+2E 20 40
+Steady-state excitation
+Ancilla 1 −P(g) 0.10 0.12
+Cavity ¯n 0.01 0.01
+Converter 1 −P(g) 0.1 0.1
+030321-24
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+TABLE III. State transfer ﬁdelities Transfer ﬁdelities of the reconstructed states shown in Figs. 15,16,a n d 19. Fidelities obtained
+from Wigner function reconstruction and from decoding onto ancilla are presented. For the cat encoding, ﬁdelities for each parity out-
+come, as well as the probability of measuring odd parity, are provided. Fidelity is given for cat code without a syndrome measurement.Weighted ﬁdelity is the deterministic average ﬁdelity of that state, weighted by the probability of the parity outcome.
+Transferred state
+Metric Method Parity outcome |0/angbracketrightL |1/angbracketrightL |+x/angbracketrightL |+y/angbracketrightL |−x/angbracketrightL |−y/angbracketrightL Average
+Fock encoding
+Fidelity Wigner n/a 0.986 0.829 0.928 0.931 0.925 0.929 0.921
+Decoded n/a 0.977 0.821 0.911 0.932 0.913 0.927 0.913
+Cat encoding
+Probability podd 0.218 0.104 0.162 0.162 0.162 0.160 0.161
+Fidelity Wigner No syndrome 0.721 0.867 0.808 0.793 0.802 0.787 0.796
+Even 0.915 0.950 0.940 0.923 0.943 0.921 0.932
+Odd 0.939 0.824 0.859 0.840 0.858 0.856 0.863
+Weighted 0.921 0.937 0.927 0.910 0.930 0.911 0.922
+Decoded Even 0.923 0.927 0.934 0.917 0.936 0.918 0.923
+Odd 0.909 0.823 0.840 0.810 0.832 0.846 0.843
+Weighted 0.920 0.916 0.920 0.900 0.919 0.908 0.913
+ﬁdelity whilst maintaining a high success probability. This
+tradeoﬀ between ﬁdelity and maximum allowed number of
+rounds is shown in Fig 18. While this scheme mitigates the
+eﬀect of single-photon loss errors in the bus, errors from
+undesired transmon excitation become increasingly preva-
+lent at high round number and result in failure to reload
+photons or enact the beam splitter, and inaccuracies in the
+parity measurements. This is evidenced by the large num-
+ber of rounds needed to reach failure probability near zero
+in Fig. 18. If the only error were photon loss in the bus, we
+would expect greater than 99% success probability within
+three rounds.
+The control ﬂow for this repeated entanglement scheme
+is shown in Fig. 14. The ﬂow is broken into several blocks:
+“Initialize” (2,208 ns, performed only once), “Attempt”
+(2,364 ns, repeated for each attempt), “Reset” (774 ns
+on average, repeated for each attempt after the ﬁrst), and
+“Tomography” (2280 ns, upon success). Each readout
+block includes an acquisition delay for internal controller
+and cabling delays (360 ns), an acquisition time (580 ns),
+and a delay for the controller state estimation to be ready
+for branching (220 ns). As explained in Appendix D1 b , the
+ﬁnal tomography measurements have an additional ancilla
+e−frotation (40 ns), a longer acquisition (640 ns), and
+no controller delay. The “Reset” length is not deterministic
+because of the diﬀering lengths of the Fock state cre-
+ation pulses and the diﬀering number of decision branching
+steps (48 ns), so we quote the average. The primary par-
+ity measurement outcomes are “gg” (success), “eg,” and
+“ge” (odd–even and even–odd, respectively), but there is a
+small ( ∼1%) probability to measured “ee” (odd–odd) due
+to measurement errors. In this case, we reset both ancilla
+and proceed as if the parity measurement were faith-
+ful, returning to the beamsplitter to try again. We could
+instead measure the parity again to conﬁrm or reject theseoutcomes as failures, but because these events are rare, the
+ﬂow taken in this case is not very important.
+Taking into account these sequence lengths and the
+relative probabilities of the number of rounds to success
+(see Fig. 18), the average time to success when consider-
+ing up to three rounds is 5205 ns, as quoted in the main
+text, not including tomography. The mean time to success
+for the fully deterministic protocol (up to 147 rounds) is
+6257 ns. This time is only slightly longer because the prob-
+ability of success approaches one in only a small number
+of rounds.
+APPENDIX H: EXPANDED DATA AND SAMPLE
+PARAMETERS
+1. Full state transfer data
+Wigner tomograms of all six states of the Fock encod-
+ing, measured as prepared in cavity 1 and received in
+cavity 2, are presented in Fig. 15. Wigner tomograms of
+all six states of the Fock encoding, measured as prepared in
+cavity 1, received in cavity 2 without parity measurement,
+and sorted by parity after measurement, are presented in
+Fig. 16. Decoded tomograms are shown in Fig. 19. State
+ﬁdelities for all datasets are presented in Table III.
+2. Full entanglement data
+All six conditional Wigner tomograms for the single-
+and two-photon entangled states are presented in Fig. 17.
+Results of multiround two-photon entanglement are shown
+in Fig. 18.
+3. Sample parameters
+Measured sample parameters for both modules can be
+found in Table II.
+030321-25
+LUKE D. BURKHART et al. PRX QUANTUM 2,030321 (2021)
+[1] Daniel Gottesman and Isaac L. Chuang, Demonstrating the
+viability of universal quantum computation using teleporta-tion and single-qubit operations, Nature 402, 390 (1999).
+[2] D. Kielpinski, C. Monroe, and D. J. Wineland, Architecture
+for a large-scale ion-trap quantum computer, Nature 417,
+709 (2002).
+[3] Liang Jiang, Jacob M. Taylor, Anders S. Sørensen, and
+Mikhail D. Lukin, Distributed quantum computation basedon small quantum registers, P h y s .R e v .A 76, 062323
+(2007).
+[4] H. J. Kimble, The quantum internet, Nature 453, 1023
+(2008).
+[5] T. E. Northup and R. Blatt, Quantum information transfer
+using photons, Nat. Photonics 8, 356 (2014).
+[6] Philipp Kurpiers, Theodore Walter, Paul Magnard, Yves
+Salathe, and Andreas Wallraﬀ, Characterizing the atten-
+uation of coaxial and rectangular microwave-frequencywaveguides at cryogenic temperatures, EPJ Quantum Tech-
+nol.4, 8 (2017).
+[7] M. Pechal, L. Huthmacher, C. Eichler, S. Zeytino ˘glu, A.
+A. Abdumalikov, S. Berger, A. Wallraﬀ, and S. Filipp,
+Microwave-Controlled Generation of Shaped Single Pho-
+tons in Circuit Quantum Electrodynamics, Phys. Rev. X 4,
+041010 (2014).
+[ 8 ] A .N a r l a ,S .S h a n k a r ,M .H a t r i d g e ,Z .L e g h t a s ,K .M .S l i w a ,
+E. Zalys-Geller, S. O. Mundhada, W. Pfaﬀ, L. Frunzio, R. J.Schoelkopf, and M. H. Devoret, Robust Concurrent Remote
+Entanglement Between two Superconducting Qubits, Phys.
+Rev. X 6, 031036 (2016).
+[9] Wolfgang Pfaﬀ, Christopher J. Axline, Luke D. Burkhart,
+Uri Vool, Philip Reinhold, Luigi Frunzio, Liang Jiang,Michel H. Devoret, and Robert J. Schoelkopf, Controlled
+release of multiphoton quantum states from a microwave
+cavity memory, Nat. Phys. 13, 882 (2017).
+[10] Philipp Kurpiers, Marek Pechal, Baptiste Royer, Paul
+Magnard, Theo Walter, Johannes Heinsoo, Yves Salathé,
+Abdulkadir Akin, Simon Storz, Jean-Claude C. Besse,Simone Gasparinetti, Alexandre Blais, and Andreas Wall-
+raﬀ, Quantum Communication with Time-Bin Encoded
+Microwave Photons, Phys. Rev. Appl. 12, 044067
+(2019).
+[11] Nissim Ofek, Andrei Petrenko, Reinier Heeres, Philip Rein-
+hold, Zaki Leghtas, Brian Vlastakis, Yehan Liu, LuigiFrunzio, S. M. Girvin, L. Jiang, Mazyar Mirrahimi, M.
+H. Devoret, and R. J. Schoelkopf, Extending the lifetime
+of a quantum bit with error correction in superconductingcircuits, Nature 536, 441 (2016).
+[12] Marios H. Michael, Matti Silveri, R. T. Brierley, Vic-
+tor V. Albert, Juha Salmilehto, Liang Jiang, and S. M.Girvin, New Class of Quantum Error-Correcting Codes for
+a Bosonic Mode, Phys. Rev. X 6, 031006 (2016).
+[13] Christopher J. Axline, Luke D. Burkhart, Wolfgang Pfaﬀ,
+Mengzhen Zhang, Kevin Chou, Philippe Campagne-Ibarcq,
+Philip Reinhold, Luigi Frunzio, S. M. Girvin, Liang Jiang,
+M. H. Devoret, and R. J. Schoelkopf, On-demand quantumstate transfer and entanglement between remote microwave
+cavity memories, Nat. Phys. 14, 705 (2018).
+[ 1 4 ] N .R o c h ,M .E .S c h w a r t z ,F .M o t z o i ,C .M a c k l i n ,R .V i j a y ,
+A. W. Eddins, A. N. Korotkov, K. B. Whaley, M. Sarovar,
+and I. Siddiqi, Observation of Measurement-InducedEntanglement and Quantum Trajectories of Remote Super-
+conducting Qubits, P h y s .R e v .L e t t . 112, 170501 (2014).
+[15] C. Dickel, J. J. Wesdorp, N. K. Langford, S. Peiter, R.
+Sagastizabal, A. Bruno, B. Criger, F. Motzoi, and L.
+DiCarlo, Chip-to-chip entanglement of transmon qubitsusing engineered measurement ﬁelds, P h y s .R e v .B 97
+,
+064508 (2018).
+[16] P. Kurpiers, P. Magnard, T. Walter, B. Royer, M. Pechal,
+J. Heinsoo, Y. Salathé, A. Akin, S. Storz, J.-C. C. Besse,
+S. Gasparinetti, A. Blais, and A. Wallraﬀ, Determinis-
+tic quantum state transfer and remote entanglement usingmicrowave photons, Nature 558, 264 (2018).
+[17] P. Campagne-Ibarcq, E. Zalys-Geller, A. Narla, S. Shankar,
+P. Reinhold, L. Burkhart, C. Axline, W. Pfaﬀ, L. Frunzio,R. J. J. Schoelkopf, and M. H. H. Devoret, Deterministic
+Remote Entanglement of Superconducting Circuits through
+Microwave Two-Photon Transitions, P h y s .R e v .L e t t . 120,
+200501 (2018).
+[18] N. Leung, Y. Lu, S. Chakram, R. K. Naik, N. Earnest, R.
+Ma, K. Jacobs, A. N. Cleland, and D. I. Schuster, Determin-istic bidirectional communication and remote entanglement
+generation between superconducting qubits, npj Quantum
+Inf.5, 18 (2019).
+[19] Y. P. Zhong, H.-S. Chang, K. J. Satzinger, M.-H. Chou, A.
+Bienfait, C. R. Conner, É. Dumur, J. Grebel, G. A. Peairs,
+R. G. Povey, D. I. Schuster, and A. N. Cleland, ViolatingBell’s inequality with remotely connected superconducting
+qubits, Nat. Phys. 15, 741 (2019).
+[20] J. Majer, J. M. Chow, J. M. Gambetta, Jens Koch, B. R.
+Johnson, J. A. Schreier, L. Frunzio, D. I. Schuster, A. A.
+H o u c k ,A .W a l l r a ﬀ ,A .B l a i s ,M .H .D e v o r e t ,S .M .G i r v i n ,and R. J. Schoelkopf, Coupling superconducting qubits via
+a cavity bus, Nature 449, 443 (2007).
+[21] Mika A. Sillanpää, Jae I. Park, and Raymond W. Sim-
+monds, Coherent quantum state storage and transfer
+between two phase qubits via a resonant cavity, Nature 449,
+438 (2007).
+[22] Pieter Kok, W. J. Munro, Kae Nemoto, T. C. Ralph,
+Jonathan P. Dowling, and G. J. Milburn, Linear optical
+quantum computing with photonic qubits, Rev. Mod. Phys.
+79, 135 (2007).
+[23] Scott Aaronson and Alex Arkhipov, The computational
+complexity of linear optics, Theory Comput. 9, 143 (2013).
+[24] Eva Zakka-Bajjani, François Nguyen, Minhyea Lee, Leila
+R. Vale, Raymond W. Simmonds, and José Aumentado,
+Quantum superposition of a single microwave photon intwo diﬀerent “colour” states, Nat. Phys. 7, 599 (2011).
+[25] Yvonne Y. Gao, Brian J. Lester, Yaxing Zhang, Chen
+Wang, Serge Rosenblum, Luigi Frunzio, Liang Jiang, S. M.Girvin, and Robert J. Schoelkopf, Programmable Interfer-
+ence between Two Microwave Quantum Memories, Phys.
+Rev. X 8, 021073 (2018).
+[26] Yvonne Y. Gao, Brian J. Lester, Kevin S. Chou, Luigi
+Frunzio, Michel H. Devoret, Liang Jiang, S. M. Girvin,
+and Robert J. Schoelkopf, Entanglement of bosonic modesthrough an engineered exchange interaction, Nature 566,
+509 (2019).
+[27] Hoi-Kwan Lau and Martin B. Plenio, Universal Quantum
+Computing with Arbitrary Continuous-Variable Encoding,
+P h y s .R e v .L e t t . 117, 100501 (2016).
+030321-26
+ERROR-DETECTED STATE TRANSFER AND ENTANGLEMENT... PRX QUANTUM 2,030321 (2021)
+[28] C. Axline, M. Reagor, R. Heeres, P. Reinhold, C. Wang,
+K. Shain, W. Pfaﬀ, Y. Chu, L. Frunzio, and R. J.Schoelkopf, An architecture for integrating planar and 3D
+cQED devices, Appl. Phys. Lett. 109, 042601 (2016).
+[29] Yaxing Zhang, Brian J. Lester, Yvonne Y. Gao, Liang Jiang,
+R. J. Schoelkopf, and S. M. Girvin, Engineering bilinear
+mode coupling in circuit QED: Theory and experiment,
+Phys. Rev. A 99, 012314 (2019).
+[30] K. Bergmann, H. Theuer, and B. W. Shore, Coherent
+population transfer among quantum states of atoms and
+molecules, Rev. Mod. Phys. 70, 1003 (1998).
+[31] N. E. Frattini, U. Vool, S. Shankar, A. Narla, K. M.
+Sliwa, and M. H. Devoret, 3-wave mixing Josephson dipole
+element, Appl. Phys. Lett. 110, 222603 (2017).
+[32] Zaki Leghtas, Gerhard Kirchmair, Brian Vlastakis, Robert
+J. Schoelkopf, Michel H. Devoret, and Mazyar Mirrahimi,
+Hardware-Eﬃcient Autonomous Quantum Memory Protec-tion, P h y s .R e v .L e t t . 111, 120501 (2013).
+[33] S. Rosenblum, P. Reinhold, M. Mirrahimi, Liang Jiang,
+L. Frunzio, and R. J. Schoelkopf, Fault-tolerant detection ofa quantum error, Science (New York, NY) 361, 266 (2018).
+[34] Kevin S. Chou, Jacob Z. Blumoﬀ, Christopher S. Wang,
+Philip C. Reinhold, Christopher J. Axline, Yvonne Y.Gao, L. Frunzio, M. H. Devoret, Liang Jiang, and R. J.
+Schoelkopf, Deterministic teleportation of a quantum gate
+between two logical qubits, Nature 561, 368 (2018).
+[35] Yong Wan, Daniel Kienzler, Stephen D. Erickson, Karl H.
+Mayer, Ting Rei Tan, Jenny J. Wu, Hilma M. Vasconcelos,
+Scott Glancy, Emanuel Knill, David J. Wineland, Andrew
+C. Wilson, and Dietrich Leibfried, Quantum gate telepor-
+tation between separated qubits in a trapped-ion processor,Science 364, 875 (2019).
+[36] Naomi H. Nickerson, Ying Li, and Simon C. Benjamin,
+Topological quantum computing with a very noisy net-work and local error rates approaching one percent, Nat.
+Commun. 4, 1756 (2013).
+[37] C. K. Hong, Z. Y. Ou, and L. Mandel, Measurement of
+Subpicosecond Time Intervals Between Two Photons by
+Interference, P h y s .R e v .L e t t . 59, 2044 (1987).
+[38] François Nguyen, Eva Zakka-Bajjani, Raymond W. Sim-
+monds, and José Aumentado, Quantum Interference
+between two Single Photons of Diﬀerent Microwave Fre-
+quencies, Phys. Rev. Lett. 108, 163602 (2012).
+[39] Chan U. Lei, Lev Krayzman, Suhas Ganjam, Luigi Frun-
+zio, and Robert J. Schoelkopf, High coherence supercon-
+ducting microwave cavities with indium bump bonding,Appl. Phys. Lett. 116, 154002 (2020).
+[40] Matthew Reagor, Wolfgang Pfaﬀ, Christopher Axline,
+Reinier W. Heeres, Nissim Ofek, Katrina Sliwa, Eric Hol-land, Chen Wang, Jacob Blumoﬀ, Kevin Chou, Michael
+J. Hatridge, Luigi Frunzio, Michel H. Devoret, Liang Jiang,and Robert J. Schoelkopf, Quantum memory with millisec-
+ond coherence in circuit QED, Phys. Rev. B 94, 014506
+(2016).
+[41] Ze-Liang Liang Xiang, Mengzhen Zhang, Liang Jiang, and
+Peter Rabl, Intracity Quantum Communication via ThermalMicrowave Networks, P h y s .R e v .X 7, 011035 (2017).
+[42] Christopher S. Wang, Jacob C. Curtis, Brian J. Lester,
+Yaxing Zhang, Yvonne Y. Gao, Jessica Freeze, Vic-tor S. Batista, Patrick H. Vaccaro, Isaac L. Chuang,
+Luigi Frunzio, Liang Jiang, S. M. Girvin, and Robert J.
+Schoelkopf, Eﬃcient Multiphoton Sampling of MolecularVibronic Spectra on a Superconducting Bosonic Processor,
+P h y s .R e v .X 10, 021060 (2020).
+[43] J. Z. Blumoﬀ, K. Chou, C. Shen, M. Reagor, C. Axline,
+R. T. Brierley, M. P. Silveri, C. Wang, B. Vlastakis, S. E.
+Nigg, L. Frunzio, M. H. Devoret, L. Jiang, S. M. Girvin, and
+R. J. Schoelkopf, Implementing and Characterizing PreciseMultiqubit Measurements, P h y s .R e v .X 6, 031041 (2016).
+[44] N. E. Frattini, V. V. Sivak, A. Lingenfelter, S. Shankar, and
+M. H. Devoret, Optimizing the Nonlinearity and Dissipa-tion of a SNAIL Parametric Ampliﬁer for Dynamic Range,
+Phys. Rev. Appl. 10, 054020 (2018).
+[45] L. DiCarlo, J. M. Chow, J. M. Gambetta, Lev S. Bishop,
+B. R. Johnson, D. I. Schuster, J. Majer, A. Blais, L. Frun-
+zio, S. M. Girvin, and R. J. Schoelkopf, Demonstration
+of two-qubit algorithms with a superconducting quantumprocessor, Nature 460, 240 (2009).
+[46] François Mallet, Florian R. Ong, Agustin Palacios-Laloy,
+François Nguyen, Patrice Bertet, Denis Vion, and Daniel
+Esteve, Single-shot qubit readout in circuit quantum elec-
+trodynamics, Nat. Phys. 5, 791 (2009).
+[47] Salvatore S. Elder, Christopher S. Wang, Philip Rein-
+hold, Connor T. Hann, Kevin S. Chou, Brian J. Lester,
+Serge Rosenblum, Luigi Frunzio, Liang Jiang, and RobertJ. Schoelkopf, High-Fidelity Measurement of Qubits
+Encoded in Multilevel Superconducting Circuits, Phys.
+Rev. X 10, 011001 (2020).
+[48] Reinier W. Heeres, Philip Reinhold, Nissim Ofek, Luigi
+Frunzio, Liang Jiang, Michel H. Devoret, and Robert J.
+Schoelkopf, Implementing a universal gate set on a logicalqubit encoded in an oscillator, Nat. Commun. 8, 94 (2017).
+[49] L. Sun, A. Petrenko, Z. Leghtas, B. Vlastakis, G. Kirch-
+mair, K. M. Sliwa, A. Narla, M. Hatridge, S. Shankar,J. Blumoﬀ, L. Frunzio, M. Mirrahimi, M. H. Devoret, and
+R. J. Schoelkopf, Tracking photon jumps with repeated
+quantum non-demolition parity measurements, Nature 511,
+444 (2014).
+[50] Linshu Li, Chang Ling Zou, Victor V. Albert, Srera-
+man Muralidharan, S. M. Girvin, and Liang Jiang, CatCodes with Optimal Decoherence Suppression for a Lossy
+Bosonic Channel, P h y s .R e v .L e t t . 119, 030502 (2017).
+030321-27
