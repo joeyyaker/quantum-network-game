@@ -6,7 +6,7 @@ An interactive educational game based on the research paper:
 
 ## 🎮 Play the Game
 
-**[🚀 Play Online](https://yourusername.github.io/quantum-network-game/)**
+**[🚀 Play Online](https://joeyyaker.github.io/quantum-network-game/)**
 
 ## 📱 Mobile Access
 
