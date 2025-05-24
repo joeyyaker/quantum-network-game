@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion
+    url: https://github.com/joeyyaker/quantum-network-game/discussions
+    about: Ask questions, share ideas, or discuss quantum physics education
+  - name: 📧 Direct Contact
+    url: mailto:your-email@example.com
+    about: For private inquiries or sensitive collaborations
